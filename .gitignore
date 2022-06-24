@@ -1,0 +1,17 @@
+public/config/edges_ai
+public/nvr-config.json
+public/config.zip
+storage/config/edges_ai
+storage/config.zip
+storage/events/
+/vendor
+/.idea
+.env
+storage/preview/
+storage/logs
+pulbic/*.zip
+pulbic/*.ts
+pulbic/*.zip
+public/hls
+*.log
+storage/videos

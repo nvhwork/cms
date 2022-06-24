@@ -1,0 +1,90 @@
+html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        .btn-model {
+          border-radius: 8px;
+          font-size: 0.8em;
+          padding: 8px 25px;
+          background: #87a8dc;
+          color: #fff;
+          -webkit-box-shadow: 0 4px 8px 0 rgba(0,0,0,.2),0 2px 4px 0 rgba(0,0,0,.08)!important;
+          box-shadow: 0 2px 4px 0 rgba(0,0,0,.2),0 2px 4px 0 rgba(0,0,0,.08)!important;
+        }
+
+        .btn-model:hover {
+          background-color: #6ba0c6;
+          color: #dcf3ff;
+        }
+
+        #app {
+            height: 100%;
+        }
+
+        .bg-white1 {
+            background-image: url(../img/header4.png);
+        }
+
+        .form-check label {
+            cursor: pointer;
+        }
+
+        .form-check input {
+            cursor: pointer;
+        }
+
+        .btn-link {
+            color: #347cb3;
+        }
+
+        .btn-link:hover {
+            color: blue;
+        }
+
+        .text-logo {
+          margin-top: -2px;
+          font-size: 1.5rem;
+          color: #FAFAFA;
+          text-shadow: 2px 2px 10px;
+          cursor: pointer;
+        }
+
+        .user {
+            float: right;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .user:hover {
+          box-shadow: 2px 2px 2px 2px;
+        }
+
+        .avatar-logo {
+          margin-top: -7px;
+          margin-left: -1px;
+          width: 37px;
+          height: 37px;
+
+        }
+
+        .navbar {
+                padding: 0rem 0rem;
+        }
+
+        .invalid-feedback1 {
+            width: 100%;
+            margin-top: .25rem;
+            font-size: 80%;
+            color: #e3342f;
+        }
+
+        .border-red{
+            border-color: #e3342f;
+        }

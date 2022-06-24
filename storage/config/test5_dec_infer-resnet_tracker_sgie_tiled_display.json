@@ -1,0 +1,886 @@
+{
+   "application":{
+      "enable-perf-measurement":{
+         "value":"1",
+         "Meaning":"Indicates whether the application performance measurement is enabled."
+      },
+      "perf-measurement-interval-sec":{
+         "value":"5",
+         "Meaning":"The interval, in seconds, at which the performance metrics are sampled and printed."
+      }
+   },
+   "tiled-display":{
+      "enable":{
+         "value":"2",
+         "Meaning":"Indicates whether tiled display is enabled. When user sets enable=2, first [sink] group with the key: link-to-demux=1 shall be linked to demuxer's src_[source_id] pad where source_id is the key set in the corresponding [sink] group."
+      },
+      "rows":{
+         "value":"1",
+         "Meaning":"Number of rows in the tiled 2D array."
+      },
+      "columns":{
+         "value":"2",
+         "Meaning":"Number of columns in the tiled 2D array."
+      },
+      "width":{
+         "value":"1920",
+         "Meaning":"Width of the tiled 2D array, in pixels."
+      },
+      "height":{
+         "value":"1080",
+         "Meaning":"Height of the tiled 2D array, in pixels."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of memory the element is to allocate for output buffers.0 (nvbuf-mem-default): a platform-specific default type.1 (nvbuf-mem-cuda-pinned): pinned\/host CUDA memory.2 (nvbuf-mem-cuda-device): device CUDA memory.3 (nvbuf-mem-cuda-unified): unified CUDA memory.For dGPU: All values are valid.For Jetson: Only 0 (zero) is valid."
+      }
+   },
+   "source0":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Enables or disables the source."
+      },
+      "type":{
+         "value":"2",
+         "Meaning":"Type of source; other properties of the source depend on this type.1: Camera (V4L2).2: URI.3: MultiURI.4: RTSP.5: Camera (CSI) (Jetson only)."
+      },
+      "uri":{
+         "value":"http:\/\/14.161.8.73\/GetData.cgi?CH=1",
+         "Meaning":"URI to the encoded stream. The URI can be a file, an HTTP URI, or an RTSP live source. Valid when type=2 or 3. With MultiURI, the %d format specifier can also be used to specify multiple sources. The application iterates from 0 to num-sources 1 to generate the actual URIs."
+      },
+      "num-sources":{
+         "value":"1",
+         "Meaning":"Number of sources. Valid only when type=3."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory element is to allocate for output buffers.0 (cuda-pinned-mem): host\/pinned memory allocated with cudaMallocHost().1 (cuda-device-mem): Device memory allocated with cudaMalloc().2 (cuda-unified-mem): Unified memory allocated with cudaMallocManaged()."
+      },
+      "latency":{
+         "value":"10000",
+         "Meaning":"Jitterbuffer size in milliseconds; applicable only for RTSP streams."
+      },
+      "smart-record":{
+         "value":"0",
+         "Meaning":"Enable or disable the smart record."
+      },
+      "smart-rec-container":{
+         "value":"0",
+         "Meaning":"Container format of recorded video. MP4 and MKV containers are supported."
+      },
+      "smart-rec-file-prefix":{
+         "value":"Cam0",
+         "Meaning":"Prefix of file name for recorded video. By default, Smart_Record is the prefix. For unique file names every source must be provided with a unique prefix."
+      },
+      "smart-rec-dir-path":{
+         "value":"\/media\/ugv\/disk\/Video Storage",
+         "Meaning":"Path of directory to save the recorded file. By default, the current directory is used."
+      },
+      "smart-rec-video-cache":{
+         "value":"60",
+         "Meaning":"Size of video cache in seconds."
+      },
+      "smart-rec-start-time":{
+         "value":"5",
+         "Meaning":"Number of seconds earlier from now to start the recording. E.g. if t0 is the current time and N is the start time in seconds that means recording will start from t0 \u2013 N. Obviously for it to work the video cache size must be greater than the N."
+      },
+      "smart-rec-default-duration":{
+         "value":"60",
+         "Meaning":"In case a Stop event is not generated. This parameter will ensure the recording is stopped after a predefined default duration."
+      },
+      "smart-rec-duration":{
+         "value":"60",
+         "Meaning":"Duration of recording in seconds."
+      },
+      "smart-rec-interval":{
+         "value":"30",
+         "Meaning":"This is the time interval in seconds for SR start \/ stop events generation."
+      }
+   },
+   "source1":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Enables or disables the source."
+      },
+      "type":{
+         "value":"4",
+         "Meaning":"Type of source; other properties of the source depend on this type.1: Camera (V4L2).2: URI.3: MultiURI.4: RTSP.5: Camera (CSI) (Jetson only)."
+      },
+      "uri":{
+         "value":"rtsp:\/\/admin:secam123@192.168.1.52:554\/cam\/realmonitor?channel=1&subtype=0&unicast=true&proto=Onvif",
+         "Meaning":"URI to the encoded stream. The URI can be a file, an HTTP URI, or an RTSP live source. Valid when type=2 or 3. With MultiURI, the %d format specifier can also be used to specify multiple sources. The application iterates from 0 to num-sources 1 to generate the actual URIs."
+      },
+      "num-sources":{
+         "value":"1",
+         "Meaning":"Number of sources. Valid only when type=3."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory element is to allocate for output buffers.0 (cuda-pinned-mem): host\/pinned memory allocated with cudaMallocHost().1 (cuda-device-mem): Device memory allocated with cudaMalloc().2 (cuda-unified-mem): Unified memory allocated with cudaMallocManaged()."
+      },
+      "smart-record":{
+         "value":"1",
+         "Meaning":"Enable or disable the smart record."
+      },
+      "smart-rec-container":{
+         "value":"0",
+         "Meaning":"Container format of recorded video. MP4 and MKV containers are supported."
+      },
+      "smart-rec-file-prefix":{
+         "value":"Cam1",
+         "Meaning":"Prefix of file name for recorded video. By default, Smart_Record is the prefix. For unique file names every source must be provided with a unique prefix."
+      },
+      "smart-rec-dir-path":{
+         "value":"\/media\/ugv\/disk\/Video Storage",
+         "Meaning":"Path of directory to save the recorded file. By default, the current directory is used."
+      },
+      "smart-rec-video-cache":{
+         "value":"5",
+         "Meaning":"Size of video cache in seconds."
+      },
+      "smart-rec-start-time":{
+         "value":"0",
+         "Meaning":"Number of seconds earlier from now to start the recording. E.g. if t0 is the current time and N is the start time in seconds that means recording will start from t0 \u2013 N. Obviously for it to work the video cache size must be greater than the N."
+      },
+      "smart-rec-default-duration":{
+         "value":"30",
+         "Meaning":"In case a Stop event is not generated. This parameter will ensure the recording is stopped after a predefined default duration."
+      },
+      "smart-rec-duration":{
+         "value":"30",
+         "Meaning":"Duration of recording in seconds."
+      },
+      "smart-rec-interval":{
+         "value":"30",
+         "Meaning":"This is the time interval in seconds for SR start \/ stop events generation."
+      }
+   },
+   "source2":{
+      "enable":{
+         "value":"0",
+         "Meaning":"Enables or disables the source."
+      },
+      "type":{
+         "value":"2",
+         "Meaning":"Type of source; other properties of the source depend on this type.1: Camera (V4L2).2: URI.3: MultiURI.4: RTSP.5: Camera (CSI) (Jetson only)."
+      },
+      "uri":{
+         "value":"http:\/\/120.127.252.114\/GetData.cgi?CH=1",
+         "Meaning":"URI to the encoded stream. The URI can be a file, an HTTP URI, or an RTSP live source. Valid when type=2 or 3. With MultiURI, the %d format specifier can also be used to specify multiple sources. The application iterates from 0 to num-sources 1 to generate the actual URIs."
+      },
+      "num-sources":{
+         "value":"1",
+         "Meaning":"Number of sources. Valid only when type=3."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory element is to allocate for output buffers.0 (cuda-pinned-mem): host\/pinned memory allocated with cudaMallocHost().1 (cuda-device-mem): Device memory allocated with cudaMalloc().2 (cuda-unified-mem): Unified memory allocated with cudaMallocManaged()."
+      },
+      "latency":{
+         "value":"40000",
+         "Meaning":"Jitterbuffer size in milliseconds; applicable only for RTSP streams."
+      }
+   },
+   "source4":{
+      "enable":{
+         "value":"0",
+         "Meaning":"Enables or disables the source."
+      },
+      "type":{
+         "value":"2",
+         "Meaning":"Type of source; other properties of the source depend on this type.1: Camera (V4L2).2: URI.3: MultiURI.4: RTSP.5: Camera (CSI) (Jetson only)."
+      },
+      "uri":{
+         "value":"http:\/\/89.222.134.169:83\/GetData.cgi?CH=1",
+         "Meaning":"URI to the encoded stream. The URI can be a file, an HTTP URI, or an RTSP live source. Valid when type=2 or 3. With MultiURI, the %d format specifier can also be used to specify multiple sources. The application iterates from 0 to num-sources 1 to generate the actual URIs."
+      },
+      "num-sources":{
+         "value":"1",
+         "Meaning":"Number of sources. Valid only when type=3."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory element is to allocate for output buffers.0 (cuda-pinned-mem): host\/pinned memory allocated with cudaMallocHost().1 (cuda-device-mem): Device memory allocated with cudaMalloc().2 (cuda-unified-mem): Unified memory allocated with cudaMallocManaged()."
+      },
+      "latency":{
+         "value":"40000",
+         "Meaning":"Jitterbuffer size in milliseconds; applicable only for RTSP streams."
+      }
+   },
+   "sink0":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Enables or disables the sink."
+      },
+      "type":{
+         "value":"2",
+         "Meaning":"Type of sink, to use..1: Fakesink.2: EGL based windowed sink (nveglglessink).3: Encode + File Save (encoder + muxer + filesink).4: Encode + RTSP streaming.5: Overlay (Jetson only).6: Message converter + Message broker."
+      },
+      "sync":{
+         "value":"0",
+         "Meaning":"Indicates how fast the stream is to be rendered..0: As fast as possible.1: Synchronously."
+      },
+      "source-id":{
+         "value":"0",
+         "Meaning":"The ID of the source whose buffers this sink must use. The source ID is contained in the source group name. For example, for group [source1] source-id=1."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory the plugin is to allocate for output buffers..0 (nvbuf-mem-default): a platform-specific default.1 (nvbuf-mem-cuda-pinned): pinned\/host CUDA memory.2 (nvbuf-mem-cuda-device): Device CUDA memory.3 (nvbuf-mem-cuda-unified): Unified CUDA memory.For dGPU: All values are valid.For Jetson: Only 0 (zero) Is valid."
+      }
+   },
+   "sink1":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Enables or disables the sink."
+      },
+      "type":{
+         "value":"4",
+         "Meaning":"Type of sink, to use..1: Fakesink.2: EGL based windowed sink (nveglglessink).3: Encode + File Save (encoder + muxer + filesink).4: Encode + RTSP streaming.5: Overlay (Jetson only).6: Message converter + Message broker."
+      },
+      "sync":{
+         "value":"0",
+         "Meaning":"Indicates how fast the stream is to be rendered..0: As fast as possible.1: Synchronously."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory the plugin is to allocate for output buffers..0 (nvbuf-mem-default): a platform-specific default.1 (nvbuf-mem-cuda-pinned): pinned\/host CUDA memory.2 (nvbuf-mem-cuda-device): Device CUDA memory.3 (nvbuf-mem-cuda-unified): Unified CUDA memory.For dGPU: All values are valid.For Jetson: Only 0 (zero) Is valid."
+      },
+      "bitrate":{
+         "value":"4000000",
+         "Meaning":null
+      },
+      "rtsp-port":{
+         "value":"8554",
+         "Meaning":"Port for the RTSP streaming server; a valid unused port number. Valid for type=4."
+      },
+      "udp-port":{
+         "value":"5400",
+         "Meaning":"Port used internally by the streaming implementation - a valid unused port number. Valid for type=4."
+      },
+      "profile":{
+         "value":"2",
+         "Meaning":"Encoder profile for the codec.V4L2 H264 encoder(HW):.0: Baseline.2: Main.4: High.V4L2 H265 encoder(HW):0: Main.1: Main10"
+      },
+      "udp-buffer-size":{
+         "value":"1000000",
+         "Meaning":"UDP kernel buffer size (in bytes) for internal RTSP output pipeline."
+      },
+      "codec":{
+         "value":"1",
+         "Meaning":"The encoder to be used to save the file..1: H.264 (hardware).2: H.265 (hardware)."
+      },
+      "iframeinterval":{
+         "value":"30",
+         "Meaning":"Encoding intra-frame occurrence frequency."
+      },
+      "source-id":{
+         "value":"0",
+         "Meaning":"The ID of the source whose buffers this sink must use. The source ID is contained in the source group name. For example, for group [source1] source-id=1."
+      },
+      "link-to-demux":{
+         "value":"1",
+         "Meaning":"A boolean which enables or disables streaming a particular \u201csource-id\u201d alone to this sink. Please check the tiled-display group enable key for more information."
+      },
+      "enc-type":{
+         "value":"0",
+         "Meaning":"Engine to use for encoder.0: NVENC hardware engine.1: CPU software encoder"
+      }
+   },
+   "sink2":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Enables or disables the sink."
+      },
+      "type":{
+         "value":"4",
+         "Meaning":"Type of sink, to use..1: Fakesink.2: EGL based windowed sink (nveglglessink).3: Encode + File Save (encoder + muxer + filesink).4: Encode + RTSP streaming.5: Overlay (Jetson only).6: Message converter + Message broker."
+      },
+      "sync":{
+         "value":"0",
+         "Meaning":"Indicates how fast the stream is to be rendered..0: As fast as possible.1: Synchronously."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory the plugin is to allocate for output buffers..0 (nvbuf-mem-default): a platform-specific default.1 (nvbuf-mem-cuda-pinned): pinned\/host CUDA memory.2 (nvbuf-mem-cuda-device): Device CUDA memory.3 (nvbuf-mem-cuda-unified): Unified CUDA memory.For dGPU: All values are valid.For Jetson: Only 0 (zero) Is valid."
+      },
+      "bitrate":{
+         "value":"2000000",
+         "Meaning":null
+      },
+      "rtsp-port":{
+         "value":"8555",
+         "Meaning":"Port for the RTSP streaming server; a valid unused port number. Valid for type=4."
+      },
+      "udp-port":{
+         "value":"5401",
+         "Meaning":"Port used internally by the streaming implementation - a valid unused port number. Valid for type=4."
+      },
+      "profile":{
+         "value":"4",
+         "Meaning":"Encoder profile for the codec.V4L2 H264 encoder(HW):.0: Baseline.2: Main.4: High.V4L2 H265 encoder(HW):0: Main.1: Main10"
+      },
+      "udp-buffer-size":{
+         "value":"10000000",
+         "Meaning":"UDP kernel buffer size (in bytes) for internal RTSP output pipeline."
+      },
+      "codec":{
+         "value":"1",
+         "Meaning":"The encoder to be used to save the file..1: H.264 (hardware).2: H.265 (hardware)."
+      },
+      "iframeinterval":{
+         "value":"15",
+         "Meaning":"Encoding intra-frame occurrence frequency."
+      },
+      "source-id":{
+         "value":"1",
+         "Meaning":"The ID of the source whose buffers this sink must use. The source ID is contained in the source group name. For example, for group [source1] source-id=1."
+      },
+      "link-to-demux":{
+         "value":"1",
+         "Meaning":"A boolean which enables or disables streaming a particular \u201csource-id\u201d alone to this sink. Please check the tiled-display group enable key for more information."
+      }
+   },
+   "sink3":{
+      "enable":{
+         "value":"0",
+         "Meaning":"Enables or disables the sink."
+      },
+      "type":{
+         "value":"4",
+         "Meaning":"Type of sink, to use..1: Fakesink.2: EGL based windowed sink (nveglglessink).3: Encode + File Save (encoder + muxer + filesink).4: Encode + RTSP streaming.5: Overlay (Jetson only).6: Message converter + Message broker."
+      },
+      "sync":{
+         "value":"0",
+         "Meaning":"Indicates how fast the stream is to be rendered..0: As fast as possible.1: Synchronously."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory the plugin is to allocate for output buffers..0 (nvbuf-mem-default): a platform-specific default.1 (nvbuf-mem-cuda-pinned): pinned\/host CUDA memory.2 (nvbuf-mem-cuda-device): Device CUDA memory.3 (nvbuf-mem-cuda-unified): Unified CUDA memory.For dGPU: All values are valid.For Jetson: Only 0 (zero) Is valid."
+      },
+      "bitrate":{
+         "value":"1000000",
+         "Meaning":null
+      },
+      "rtsp-port":{
+         "value":"8556",
+         "Meaning":"Port for the RTSP streaming server; a valid unused port number. Valid for type=4."
+      },
+      "udp-port":{
+         "value":"5402",
+         "Meaning":"Port used internally by the streaming implementation - a valid unused port number. Valid for type=4."
+      },
+      "profile":{
+         "value":"4",
+         "Meaning":"Encoder profile for the codec.V4L2 H264 encoder(HW):.0: Baseline.2: Main.4: High.V4L2 H265 encoder(HW):0: Main.1: Main10"
+      },
+      "udp-buffer-size":{
+         "value":"10000000",
+         "Meaning":"UDP kernel buffer size (in bytes) for internal RTSP output pipeline."
+      },
+      "codec":{
+         "value":"1",
+         "Meaning":"The encoder to be used to save the file..1: H.264 (hardware).2: H.265 (hardware)."
+      },
+      "iframeinterval":{
+         "value":"15",
+         "Meaning":"Encoding intra-frame occurrence frequency."
+      },
+      "source-id":{
+         "value":"2",
+         "Meaning":"The ID of the source whose buffers this sink must use. The source ID is contained in the source group name. For example, for group [source1] source-id=1."
+      },
+      "link-to-demux":{
+         "value":"1",
+         "Meaning":"A boolean which enables or disables streaming a particular \u201csource-id\u201d alone to this sink. Please check the tiled-display group enable key for more information."
+      }
+   },
+   "sink4":{
+      "enable":{
+         "value":"0",
+         "Meaning":"Enables or disables the sink."
+      },
+      "type":{
+         "value":"4",
+         "Meaning":"Type of sink, to use..1: Fakesink.2: EGL based windowed sink (nveglglessink).3: Encode + File Save (encoder + muxer + filesink).4: Encode + RTSP streaming.5: Overlay (Jetson only).6: Message converter + Message broker."
+      },
+      "sync":{
+         "value":"0",
+         "Meaning":"Indicates how fast the stream is to be rendered..0: As fast as possible.1: Synchronously."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory the plugin is to allocate for output buffers..0 (nvbuf-mem-default): a platform-specific default.1 (nvbuf-mem-cuda-pinned): pinned\/host CUDA memory.2 (nvbuf-mem-cuda-device): Device CUDA memory.3 (nvbuf-mem-cuda-unified): Unified CUDA memory.For dGPU: All values are valid.For Jetson: Only 0 (zero) Is valid."
+      },
+      "bitrate":{
+         "value":"1000000",
+         "Meaning":null
+      },
+      "rtsp-port":{
+         "value":"8557",
+         "Meaning":"Port for the RTSP streaming server; a valid unused port number. Valid for type=4."
+      },
+      "udp-port":{
+         "value":"5403",
+         "Meaning":"Port used internally by the streaming implementation - a valid unused port number. Valid for type=4."
+      },
+      "profile":{
+         "value":"4",
+         "Meaning":"Encoder profile for the codec.V4L2 H264 encoder(HW):.0: Baseline.2: Main.4: High.V4L2 H265 encoder(HW):0: Main.1: Main10"
+      },
+      "udp-buffer-size":{
+         "value":"10000000",
+         "Meaning":"UDP kernel buffer size (in bytes) for internal RTSP output pipeline."
+      },
+      "codec":{
+         "value":"1",
+         "Meaning":"The encoder to be used to save the file..1: H.264 (hardware).2: H.265 (hardware)."
+      },
+      "iframeinterval":{
+         "value":"15",
+         "Meaning":"Encoding intra-frame occurrence frequency."
+      },
+      "source-id":{
+         "value":"3",
+         "Meaning":"The ID of the source whose buffers this sink must use. The source ID is contained in the source group name. For example, for group [source1] source-id=1."
+      },
+      "link-to-demux":{
+         "value":"1",
+         "Meaning":"A boolean which enables or disables streaming a particular \u201csource-id\u201d alone to this sink. Please check the tiled-display group enable key for more information."
+      }
+   },
+   "sink5":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Enables or disables the sink."
+      },
+      "type":{
+         "value":"6",
+         "Meaning":"Type of sink, to use..1: Fakesink.2: EGL based windowed sink (nveglglessink).3: Encode + File Save (encoder + muxer + filesink).4: Encode + RTSP streaming.5: Overlay (Jetson only).6: Message converter + Message broker."
+      },
+      "msg-conv-config":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/sources\/apps\/sample_apps\/deepstream-test5\/configs\/dstest5_msgconv_sample_config.txt",
+         "Meaning":"Pathname of the configuration file for the Gst-nvmsgconv element (type=6)."
+      },
+      "msg-conv-payload-type":{
+         "value":"1",
+         "Meaning":"Type of payload.0, PAYLOAD_DEEPSTREAM: DeepStream schema payload.1, PAYLOAD_DEEPSTREAM_MINIMAL: DeepStream schema payload minimal.256, PAYLOAD_RESERVED: Reserved type.257, PAYLOAD_CUSTOM: Custom schema payload (type=6)."
+      },
+      "msg-broker-proto-lib":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/lib\/libnvds_kafka_proto.so",
+         "Meaning":"Path to the protocol adapter implementation used Gst-nvmsgbroker (type=6)."
+      },
+      "msg-broker-conn-str":{
+         "value":"192.168.151.11;9092;nvxavier01",
+         "Meaning":"Connection string of the backend server (type=6)."
+      },
+      "topic":{
+         "value":"nvxavier01",
+         "Meaning":"Name of the message topic (type=6)."
+      }
+   },
+   "sink6":{
+      "enable":{
+         "value":"0",
+         "Meaning":"Enables or disables the sink."
+      },
+      "type":{
+         "value":"3",
+         "Meaning":"Type of sink, to use..1: Fakesink.2: EGL based windowed sink (nveglglessink).3: Encode + File Save (encoder + muxer + filesink).4: Encode + RTSP streaming.5: Overlay (Jetson only).6: Message converter + Message broker."
+      },
+      "sync":{
+         "value":"1",
+         "Meaning":"Indicates how fast the stream is to be rendered..0: As fast as possible.1: Synchronously."
+      },
+      "source-id":{
+         "value":"0",
+         "Meaning":"The ID of the source whose buffers this sink must use. The source ID is contained in the source group name. For example, for group [source1] source-id=1."
+      },
+      "container":{
+         "value":"1",
+         "Meaning":"Container to use for the file save. Only valid for type=3.1: MP4.2: MKV."
+      },
+      "codec":{
+         "value":"3",
+         "Meaning":"The encoder to be used to save the file..1: H.264 (hardware).2: H.265 (hardware)."
+      },
+      "bitrate":{
+         "value":"2000000",
+         "Meaning":"Bitrate to use for encoding, in bits per second. Valid for type=3 and 4."
+      },
+      "output-file":{
+         "value":"out.mp4",
+         "Meaning":"Pathname of the output encoded file. Only valid for type=3."
+      }
+   },
+   "message-converter":{
+      "enable":{
+         "value":"0",
+         "Meaning":"Enables or disables the message converter."
+      },
+      "msg-conv-config":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/sources\/apps\/sample_apps\/deepstream-test5\/configs\/dstest5_msgconv_sample_config.txt",
+         "Meaning":"Pathname of the configuration file for the Gst-nvmsgconv element."
+      },
+      "msg-conv-payload-type":{
+         "value":"0",
+         "Meaning":"Type of payload.0, PAYLOAD_DEEPSTREAM: Deepstream schema payload.1, PAYLOAD_DEEPSTREAM_MINIMAL: Deepstream schema payload minimal.256, PAYLOAD_RESERVED: Reserved type.257, PAYLOAD_CUSTOM: Custom schema payload."
+      }
+   },
+   "message-consumer0":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Enables or disables the message consumer."
+      },
+      "proto-lib":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/lib\/libnvds_kafka_proto.so",
+         "Meaning":"Path to the library having protocol adapter implementation."
+      },
+      "conn-str":{
+         "value":"192.168.151.11;9092",
+         "Meaning":"foo.bar.com;80"
+      },
+      "subscribe-topic-list":{
+         "value":"nvxavier01",
+         "Meaning":"List of topics to subscribe."
+      }
+   },
+   "osd":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Enables or disables the On-Screen Display (OSD)."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":" GPU to be used by the element in case of multiple GPUs."
+      },
+      "border-width":{
+         "value":"1",
+         "Meaning":"Border width of the bounding boxes drawn for objects, in pixels."
+      },
+      "text-size":{
+         "value":"15",
+         "Meaning":"Size of the text that describes the objects, in points."
+      },
+      "text-color":{
+         "value":"1;1;1;1;",
+         "Meaning":"The color of the text that describes the objects, in RGBA format."
+      },
+      "text-bg-color":{
+         "value":"0.3;0.3;0.3;1",
+         "Meaning":"The background color of the text that describes the objects, in RGBA format."
+      },
+      "clock-text-size":{
+         "value":"12",
+         "Meaning":"The size of the clock time text, in points."
+      },
+      "clock-x-offset":{
+         "value":"820",
+         "Meaning":"The horizontal offset of the clock time text, in pixels."
+      },
+      "clock-y-offset":{
+         "value":"820",
+         "Meaning":"The vertical offset of the clock time text, in pixels."
+      },
+      "font":{
+         "value":"Arial",
+         "Meaning":"Name of the font for text that describes the objects. Enter the shell command fc-list to display the names of available fonts."
+      },
+      "show-clock":{
+         "value":"1",
+         "Meaning":"Enables or disables overlay of the clock time on the frame."
+      },
+      "clock-color":{
+         "value":"1;0;0;0",
+         "Meaning":"Color of the clock time text, in RGBA format."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory the element is to allocate for output buffers.0 (nvbuf-mem-default): a platform-specific default1 (nvbuf-mem-cuda-pinned): pinned\/host CUDA memory2 (nvbuf-mem-cuda-device): Device CUDA memory3 (nvbuf-mem-cuda-unified): Unified CUDA memoryFor dGPU: All values are valid.For Jetson: Only 0 (zero) is valid."
+      }
+   },
+   "streammux":{
+      "gpu-id":{
+         "value":"1",
+         "Meaning":"GPU element is to use in case of multiple GPUs."
+      },
+      "live-source":{
+         "value":"1",
+         "Meaning":"Informs the muxer that sources are live."
+      },
+      "batch-size":{
+         "value":"2",
+         "Meaning":"Muxer batch size."
+      },
+      "batched-push-timeout":{
+         "value":"40000",
+         "Meaning":"Timeout in microseconds after to push the batch after the first buffer is available, even if the complete batch is not formed."
+      },
+      "width":{
+         "value":"1920",
+         "Meaning":"Muxer output width in pixels."
+      },
+      "height":{
+         "value":"1080",
+         "Meaning":"Muxer output height in pixels."
+      },
+      "enable-padding":{
+         "value":"0",
+         "Meaning":"Indicates whether to maintain source aspect ratio when scaling by adding black bands."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory the element is to allocate for output buffers.0 (nvbuf-mem-default, a platform-specific default1 (nvbuf-mem-cuda-pinned): pinned\/host CUDA memory.2 (nvbuf-mem-cuda-device): Device CUDA memory.3 (nvbuf-mem-cuda-unified): Unified CUDA memory.For dGPU: All values are valid.For Jetson: Only 0 (zero) is valid."
+      },
+      "attach-sys-ts-as-ntp":{
+         "value":"1",
+         "Meaning":"For live sources, the muxed buffer shall have associated NvDsFrameMeta->ntp_timestamp set to system time or the server\u2019s NTP time when streaming RTSP. If set to 1, system timestamp will be attached as ntp timestamp.If set to 0, ntp timestamp from rtspsrc, if available, will be attached."
+      }
+   },
+   "primary-gie":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Indicates whether the primary GIE must be enabled."
+      },
+      "gie-unique-id":{
+         "value":"1",
+         "Meaning":"Unique component ID to be assigned to the nvinfer instance. Used to identify metadata generated by the instance."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "nvbuf-memory-type":{
+         "value":"0",
+         "Meaning":"Type of CUDA memory element is to allocate for output buffers.0 (nvbuf-mem-default): a platform-specific default1 (nvbuf-mem-cuda-pinned): pinned\/host CUDA memory2 (nvbuf-mem-cuda-device): Device CUDA memory3 (nvbuf-mem-cuda-unified): Unified CUDA memoryFor dGPU: All values are valid.For Jetson: Only 0 (zero) is valid."
+      },
+      "config-file":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/sources\/objectDetector_Yolo\/config_infer_primary_yoloV3.txt",
+         "Meaning":"Pathname of a configuration file which specifies properties for the Gst-nvinfer plugin. It may contain any of the properties described in this table except config-file itself. Properties must be defined in a group named [property].For more details about parameters see \u201cGst-nvinfer File Configuration Specifications\u201d in the DeepStream 4.0 Plugin Manual."
+      },
+      "batch-size":{
+         "value":"1",
+         "Meaning":"The number of frames(P.GIE)\/objects(S.GIE) to be inferred together in a batch."
+      },
+      "interval":{
+         "value":"0",
+         "Meaning":"Number of consecutive batches to skip for inference."
+      },
+      "bbox-border-color0":{
+         "value":"1;0;0;1",
+         "Meaning":"The color of the borders for the objects of a specific class ID, specified in RGBA format. The key must be of format bbox-border-color<class-id>. This property can be identified multiple times for multiple class IDs. If this property is not identified for the class ID, the borders are not drawn for objects of that class-id."
+      },
+      "bbox-border-color1":{
+         "value":"0;1;1;1",
+         "Meaning":"The color of the borders for the objects of a specific class ID, specified in RGBA format. The key must be of format bbox-border-color<class-id>. This property can be identified multiple times for multiple class IDs. If this property is not identified for the class ID, the borders are not drawn for objects of that class-id."
+      },
+      "bbox-border-color2":{
+         "value":"0;0;1;1",
+         "Meaning":"The color of the borders for the objects of a specific class ID, specified in RGBA format. The key must be of format bbox-border-color<class-id>. This property can be identified multiple times for multiple class IDs. If this property is not identified for the class ID, the borders are not drawn for objects of that class-id."
+      },
+      "bbox-border-color3":{
+         "value":"0;1;0;1",
+         "Meaning":"The color of the borders for the objects of a specific class ID, specified in RGBA format. The key must be of format bbox-border-color<class-id>. This property can be identified multiple times for multiple class IDs. If this property is not identified for the class ID, the borders are not drawn for objects of that class-id."
+      }
+   },
+   "tracker":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Enables or disables the tracker."
+      },
+      "tracker-width":{
+         "value":"640",
+         "Meaning":"Frame width at which the tracker will operate, in pixels."
+      },
+      "tracker-height":{
+         "value":"384",
+         "Meaning":"Frame height at which the tracker will operate, in pixels."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "ll-lib-file":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/lib\/libnvds_mot_klt.so",
+         "Meaning":"Pathname for the low-level tracker implementation library."
+      },
+      "enable-batch-process":{
+         "value":"0",
+         "Meaning":"Enables batch processing across multiple streams."
+      }
+   },
+   "secondary-gie0":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Indicates whether the primary GIE must be enabled."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "gie-unique-id":{
+         "value":"4",
+         "Meaning":"Unique component ID to be assigned to the nvinfer instance. Used to identify metadata generated by the instance."
+      },
+      "operate-on-gie-id":{
+         "value":"1",
+         "Meaning":"A unique ID of the GIE, on whose metadata (NvDsFrameMeta) this GIE is to operate."
+      },
+      "operate-on-class-ids":{
+         "value":"2",
+         "Meaning":"Class IDs of the parent GIE on which this GIE must operate. The parent GIE is specified using operate-on-gie-id."
+      },
+      "batch-size":{
+         "value":"16",
+         "Meaning":"The number of frames(P.GIE)\/objects(S.GIE) to be inferred together in a batch."
+      },
+      "config-file":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/configs\/deepstream-app\/config_infer_secondary_vehicletypes.txt",
+         "Meaning":"Pathname of a configuration file which specifies properties for the Gst-nvinfer plugin. It may contain any of the properties described in this table except config-file itself. Properties must be defined in a group named [property].For more details about parameters see \u201cGst-nvinfer File Configuration Specifications\u201d in the DeepStream 4.0 Plugin Manual."
+      },
+      "labelfile-path":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/models\/Secondary_VehicleTypes\/labels.txt",
+         "Meaning":null
+      },
+      "model-engine-file":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/models\/Secondary_VehicleTypes\/resnet18.caffemodel_b16_gpu0_int8.engine",
+         "Meaning":null
+      }
+   },
+   "secondary-gie1":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Indicates whether the primary GIE must be enabled."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "gie-unique-id":{
+         "value":"5",
+         "Meaning":"Unique component ID to be assigned to the nvinfer instance. Used to identify metadata generated by the instance."
+      },
+      "operate-on-gie-id":{
+         "value":"1",
+         "Meaning":"A unique ID of the GIE, on whose metadata (NvDsFrameMeta) this GIE is to operate."
+      },
+      "operate-on-class-ids":{
+         "value":"2",
+         "Meaning":"Class IDs of the parent GIE on which this GIE must operate. The parent GIE is specified using operate-on-gie-id."
+      },
+      "batch-size":{
+         "value":"16",
+         "Meaning":"The number of frames(P.GIE)\/objects(S.GIE) to be inferred together in a batch."
+      },
+      "config-file":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/configs\/deepstream-app\/config_infer_secondary_carcolor.txt",
+         "Meaning":"Pathname of a configuration file which specifies properties for the Gst-nvinfer plugin. It may contain any of the properties described in this table except config-file itself. Properties must be defined in a group named [property].For more details about parameters see \u201cGst-nvinfer File Configuration Specifications\u201d in the DeepStream 4.0 Plugin Manual."
+      },
+      "labelfile-path":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/models\/Secondary_CarColor\/labels.txt",
+         "Meaning":null
+      },
+      "model-engine-file":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/models\/Secondary_CarColor\/resnet18.caffemodel_b16_gpu0_int8.engine",
+         "Meaning":null
+      }
+   },
+   "secondary-gie2":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Indicates whether the primary GIE must be enabled."
+      },
+      "gpu-id":{
+         "value":"0",
+         "Meaning":"GPU to be used by the element in case of multiple GPUs."
+      },
+      "gie-unique-id":{
+         "value":"6",
+         "Meaning":"Unique component ID to be assigned to the nvinfer instance. Used to identify metadata generated by the instance."
+      },
+      "operate-on-gie-id":{
+         "value":"1",
+         "Meaning":"A unique ID of the GIE, on whose metadata (NvDsFrameMeta) this GIE is to operate."
+      },
+      "operate-on-class-ids":{
+         "value":"2",
+         "Meaning":"Class IDs of the parent GIE on which this GIE must operate. The parent GIE is specified using operate-on-gie-id."
+      },
+      "batch-size":{
+         "value":"16",
+         "Meaning":"The number of frames(P.GIE)\/objects(S.GIE) to be inferred together in a batch."
+      },
+      "config-file":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/configs\/deepstream-app\/config_infer_secondary_carmake.txt",
+         "Meaning":"Pathname of a configuration file which specifies properties for the Gst-nvinfer plugin. It may contain any of the properties described in this table except config-file itself. Properties must be defined in a group named [property].For more details about parameters see \u201cGst-nvinfer File Configuration Specifications\u201d in the DeepStream 4.0 Plugin Manual."
+      },
+      "labelfile-path":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/models\/Secondary_CarMake\/labels.txt",
+         "Meaning":null
+      },
+      "model-engine-file":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/models\/Secondary_CarMake\/resnet18.caffemodel_b16_gpu0_int8.engine",
+         "Meaning":null
+      }
+   },
+   "analytics":{
+      "enable":{
+         "value":"1",
+         "Meaning":"Indicates whether the primary GIE must be enabled."
+      },
+      "config-file":{
+         "value":"\/opt\/nvidia\/deepstream\/deepstream-5.0\/samples\/configs\/hieumd\/config_nvdsanalytics.txt",
+         "Meaning":"Pathname of a configuration file which specifies properties for the Gst-nvinfer plugin. It may contain any of the properties described in this table except config-file itself. Properties must be defined in a group named [property].For more details about parameters see \u201cGst-nvinfer File Configuration Specifications\u201d in the DeepStream 4.0 Plugin Manual."
+      },
+      "unique-id":{
+         "value":"1",
+         "Meaning":"Unique component ID to be assigned to the nvinfer instance. Used to identify metadata generated by the instance."
+      }
+   },
+   "tests":{
+      "file-loop":{
+         "value":"0",
+         "Meaning":"Indicates whether input files should be looped infinitely."
+      }
+   }
+}
