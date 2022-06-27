@@ -268,8 +268,6 @@ class ApiEdgeController extends Controller
 			$row = mysqli_fetch_assoc($result);
 			$verify = password_verify($pwd, $row["password"]);
 			if ($verify) {
-				$_SESSION['valid'] = true;
-				$_SESSION['timeout'] = time();
 				$_SESSION['username'] = $usr;
 				$_SESSION['role'] = $row["role"];
 				echo 'Login successfully';

@@ -1,4 +1,9 @@
 <!doctype html>
+<?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <title>Center Management System</title>
@@ -112,9 +117,11 @@
             </div>
         </div>
         <div class="setting">
-        
+
         </div>
         <div id="background-black"></div>
+        <?php var_dump($_SESSION) ?>
+
         <script>
             $(".event-class").click(function() {
               $(".exists-noti").attr("hidden",true);

@@ -1,7 +1,6 @@
 @extends('../layouts/index')
 @section('content')
     <?php
-        session_start();
         if (!isset($_SESSION['role'])) {
             header("refresh: 0, url=/login");
             exit;
