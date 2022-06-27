@@ -245,6 +245,8 @@ class ApiEdgeController extends Controller
 	}
 
 	public function login(Request $req) {
+		session_start();
+
 		// Get data from form
 		$usr = $req->input('username');
 		$pwd = $req->input('password');
@@ -260,12 +262,16 @@ class ApiEdgeController extends Controller
 			die("Connection failed: " . mysqli_connect_error());
 		}
 
-		$sql = "SELECT password FROM accounts WHERE username = '" . $usr . "';";
+		$sql = "SELECT password, role FROM accounts WHERE username = '" . $usr . "';";
 		$result = mysqli_query($conn, $sql);
 		if (mysqli_num_rows($result) > 0) {
 			$row = mysqli_fetch_assoc($result);
 			$verify = password_verify($pwd, $row["password"]);
 			if ($verify) {
+				$_SESSION['valid'] = true;
+				$_SESSION['timeout'] = time();
+				$_SESSION['username'] = $usr;
+				$_SESSION['role'] = $row["role"];
 				echo 'Login successfully';
 			} else {
 				echo 'Wrong password';
@@ -276,5 +282,14 @@ class ApiEdgeController extends Controller
 
 		mysqli_close($conn);
 		header("refresh: 3; url=/");
+	}
+
+	public function logout() {
+		session_start();
+		unset($_SESSION['username']);
+		unset($_SESSION['role']);
+
+		echo 'Log out successfully!';
+		header("refresh: 3; url=/login");
 	}
 }

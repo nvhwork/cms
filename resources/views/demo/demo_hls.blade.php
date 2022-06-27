@@ -1,5 +1,12 @@
 @extends('../layouts/index')
 @section('content')
+    <?php
+        session_start();
+        if (!isset($_SESSION['role'])) {
+            header("refresh: 0, url=/login");
+            exit;
+        }
+    ?>
   <link rel="stylesheet" href="/js-css/css/checkbox_custom.css">
       <div class="content-camera" style="display: flex;">
         <div class="tree-area">

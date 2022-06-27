@@ -35,32 +35,42 @@
                     <div class="close-menu" onclick="menu_close();">
                         <i class="fa fa-outdent" aria-hidden="true"></i>
                     </div>
-                    <div class="user1" id="account" status="1">
-                        <span class="header-item event-class" hidden="">
-                            <i class="fa fa-bell" aria-hidden="true"></i>
-                            <i class="fa fa-info exists-noti" aria-hidden="true" hidden=""></i>
-                        </span>
-                        <p hidden="" id="events" status="1"></p>
-                        <span class="header-item account-header">
-                            Demo &nbsp;<i class="fa fa-user" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <div class="dropdown-content">
-                        <div class="user-login user-name">
-                            <span class="span-avatar"><i class="fa fa-user" aria-hidden="true"></i> &nbsp;Demo</span>
-                        </div>
-                        <a href="changepassword" class="white-color">
-                            <div class="user-setting">
-                                <small><i class="fa fa-unlock-alt white-color"></i> &nbsp;Change the password</small>
-                            </div>
-                        </a>
-                        <a href="logoutkms" class="white-color">
-                            <div class="user-setting">
-                                <small><i class="fa fa-sign-out white-color"></i> &nbsp;Logout</small>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="dropdown-content-event">
+                    <?php
+                        if (isset($_SESSION['username'])) {
+                            $usr = $_SESSION['username'];
+                            echo '  <div class="user1" id="account" status="1">
+                                        <span class="header-item account-header">
+                                            ' . $usr . ' &nbsp;<i class="fa fa-user" aria-hidden="true"></i>
+                                        </span>
+                                    </div>  
+                                    <div class="dropdown-content">
+                                        <div class="user-login user-name">
+                                            <span class="span-avatar"><i class="fa fa-user" aria-hidden="true"></i> &nbsp;' . $usr . '</span>
+                                        </div>
+                                        <a href="changepassword" class="white-color">
+                                            <div class="user-setting">
+                                                <small><i class="fa fa-unlock-alt white-color"></i> &nbsp;Change the password</small>
+                                            </div>
+                                        </a>
+                                        <a href="api/logout" class="white-color">
+                                            <div class="user-setting">
+                                                <small><i class="fa fa-sign-out white-color"></i> &nbsp;Logout</small>
+                                            </div>
+                                        </a>
+                                    </div>  ';
+                        } else {
+                            echo '  <div class="user1" status="1">
+                                        <span class="header-item account-header">
+                                            <a href="login" class="white-color">
+                                                Sign in &nbsp;<i class="fa fa-sign-in white-color"></i>
+                                            </a>
+                                        </span>
+                                    </div>  ';
+                        }
+                    ?>
+                    
+                    
+                    <!-- <div class="dropdown-content-event">
                         <div id="dropdown-event">
 
                         </div>
@@ -73,7 +83,7 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="sidenav">

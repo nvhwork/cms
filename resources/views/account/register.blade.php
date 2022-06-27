@@ -1,11 +1,10 @@
 @extends('../layouts/index')
 @section('content')
     <?php
-        ob_start();
         session_start();
-        $msg = '';
-        if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-            
+        if (!isset($_SESSION['role'])) {
+            header("refresh: 0, url=/login");
+            exit;
         }
     ?>
     <div class="content-camera p-flex flex-column">

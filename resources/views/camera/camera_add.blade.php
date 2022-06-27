@@ -1,5 +1,12 @@
 @extends('../layouts/index')
 @section('content')
+    <?php
+        session_start();
+        if (!isset($_SESSION['role'])) {
+            header("refresh: 0, url=/login");
+            exit;
+        }
+    ?>
     <div class="content-camera p-flex flex-column">
         <div class="p-5">
             <form action="/api/add-camera" method="post">

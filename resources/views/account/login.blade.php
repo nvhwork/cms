@@ -1,13 +1,5 @@
 @extends('../layouts/index')
 @section('content')
-    <?php
-        ob_start();
-        session_start();
-        $msg = '';
-        if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-            
-        }
-    ?>
     <div class="content-camera p-flex flex-column">
         <div class="p-5">
             <form action="/api/login" method="post">
@@ -24,7 +16,7 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
                     </div>
                     <div class="form-group col-md-12">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
                         <!-- <a href="/cameras" class="btn btn-success">Back to camera list</a> -->
                     </div>
                 </div>
