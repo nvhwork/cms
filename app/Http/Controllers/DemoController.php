@@ -29,4 +29,12 @@ class DemoController extends Controller
   public function addStream() {
     return view('stream.stream_add');
   }
+
+  public function login() {
+    return view ('account.login');
+  }
+
+  public function register() {
+    return view ('account.register');
+  }
 }

@@ -28,6 +28,10 @@ Route::get('/delete-stream/{stream_id}', 'ApiEdgeController@deleteStream');
 
 Route::get('/notify-stream/{msg}', 'ApiEdgeController@notifyStream');
 
+Route::post('login', 'ApiEdgeController@login');
+
+Route::post('register', 'ApiEdgeController@registerAccount');
+
 Route::get('/get-file-hls/{cam_id}/{file_name}', 'CameraController@getFileHls');
 
 Route::get('get-stream-list', 'CameraController@getStreamList');

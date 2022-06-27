@@ -39,46 +39,46 @@ class ApiEdgeController extends Controller
 	    return response("false", 404);
 	}
 
-    public function login(Request $req, $edge_id, $serial_number){
-    	//Need to install phpseclib
-    	// composer require phpseclib/phpseclib:~2.0
-        //check serila numbers
-        //Return emcrypted token
-    	$edge = Edge::where([['serial_number',$serial_number],['id',$edge_id]])->first();
-		// return $edge;
-    	if ($edge == null){
-    		return response("Edge not found.", 404);
-    	}
-    	//Else
+    // public function login(Request $req, $edge_id, $serial_number){
+    // 	//Need to install phpseclib
+    // 	// composer require phpseclib/phpseclib:~2.0
+    //     //check serila numbers
+    //     //Return emcrypted token
+    // 	$edge = Edge::where([['serial_number',$serial_number],['id',$edge_id]])->first();
+	// 	// return $edge;
+    // 	if ($edge == null){
+    // 		return response("Edge not found.", 404);
+    // 	}
+    // 	//Else
 
 
-        $msg = $edge->token;
-        $key = $edge->publickey;
-        $encrypted = '';
-        //$key for test
-        // $key ="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDhPj6eBKOEw2qjAjtT5DDIwybZFZatQ0KhqmGRRlw6jeBNKlK/5hKwwdUdFULq5ZHdmur6YxAf69T2TjFGL7DR26wdmy6HE9NPRfxNMzJmY76JE4StfWm1eTTa0qb7IFe0ls6Ao9Ncix9M/8X5FXycunFwmMW0DJJlxH/z+Ju5nYMqNcaDlzwjJ+g6qLABp592uZpAqDW5npX5cyyHeZb2D7Df0NtmqG8ekMMZDhzbPyhNB7LGJaOO5fWB7hdUQJdrrl2qnmxVcJSyZJu9CJgP/25owcaeCK2+THHQnLGvJwBzMuIBDmJNlKk9XMowddc1cdR88HNagNj3hfqQasAz map@map2-virtual-machine";
-        $rsa = new RSA();
-        $rsa->loadKey($key);
+    //     $msg = $edge->token;
+    //     $key = $edge->publickey;
+    //     $encrypted = '';
+    //     //$key for test
+    //     // $key ="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDhPj6eBKOEw2qjAjtT5DDIwybZFZatQ0KhqmGRRlw6jeBNKlK/5hKwwdUdFULq5ZHdmur6YxAf69T2TjFGL7DR26wdmy6HE9NPRfxNMzJmY76JE4StfWm1eTTa0qb7IFe0ls6Ao9Ncix9M/8X5FXycunFwmMW0DJJlxH/z+Ju5nYMqNcaDlzwjJ+g6qLABp592uZpAqDW5npX5cyyHeZb2D7Df0NtmqG8ekMMZDhzbPyhNB7LGJaOO5fWB7hdUQJdrrl2qnmxVcJSyZJu9CJgP/25owcaeCK2+THHQnLGvJwBzMuIBDmJNlKk9XMowddc1cdR88HNagNj3hfqQasAz map@map2-virtual-machine";
+    //     $rsa = new RSA();
+    //     $rsa->loadKey($key);
          
-        $encrypted = $rsa->encrypt($msg);
+    //     $encrypted = $rsa->encrypt($msg);
 
 
-        $data = [
-		    'iss' => new Issuer('dasvision.vn'),
-		    'iat' => new IssuedAt(Carbon::now('UTC')) ,
-		    'exp' => new Expiration(Carbon::now('UTC')->addSeconds(10)),
-		    'nbf' => new NotBefore(Carbon::now('UTC')),
-		    'sub' => new Subject('for-io'),
-		    'jti' => new JwtId(Str::uuid()->toString()),
-		    'edge_id' => $edge->id
-		];
+    //     $data = [
+	// 	    'iss' => new Issuer('dasvision.vn'),
+	// 	    'iat' => new IssuedAt(Carbon::now('UTC')) ,
+	// 	    'exp' => new Expiration(Carbon::now('UTC')->addSeconds(10)),
+	// 	    'nbf' => new NotBefore(Carbon::now('UTC')),
+	// 	    'sub' => new Subject('for-io'),
+	// 	    'jti' => new JwtId(Str::uuid()->toString()),
+	// 	    'edge_id' => $edge->id
+	// 	];
 
-	    $customClaims = JWTFactory::customClaims($data);
-	    $payload = JWTFactory::make($customClaims);
-	    $jwt_token = JWTAuth::encode($payload);
+	//     $customClaims = JWTFactory::customClaims($data);
+	//     $payload = JWTFactory::make($customClaims);
+	//     $jwt_token = JWTAuth::encode($payload);
 
-        return ['token' => base64_encode($encrypted), 'edge_id'=>$edge->id, 'jwt_token'=>$jwt_token->get()];
-    }
+    //     return ['token' => base64_encode($encrypted), 'edge_id'=>$edge->id, 'jwt_token'=>$jwt_token->get()];
+    // }
 
     public function getConfig(Request $req, $edge_id,  $token){
         //Check token_name(token)
@@ -206,5 +206,75 @@ class ApiEdgeController extends Controller
 		echo $msg;
 		header("refresh: 3; url=/streams");
 		exit();
+	}
+
+	public function registerAccount(Request $req) {
+		// Get data from form
+		$usr = $req->input('username');
+		$pwd = $req->input('password');
+		$role = $req->input('role');
+		$confPwd = $req->input('confPwd');
+
+		if (strcmp($pwd, $confPwd) != 0) {
+			echo 'The 2 input passwords are not identical!';
+		} else {
+			$server = "localhost";
+			$username = "hoangnv";
+			$password = "bkcs2022";
+			$database = "transcoding";
+
+			$conn = mysqli_connect($server, $username, $password, $database);
+
+			if (!$conn) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
+			$hashPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+			$sql = "INSERT INTO accounts VALUES ('" . $usr . "', '" 
+					. $hashPwd . "', '" . $role . "');";
+			
+			if (mysqli_query($conn, $sql)) {
+				echo "Add account completed!";
+			} else {
+				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			}
+	
+			mysqli_close($conn);
+			header("refresh: 3; url=/");
+		}
+	}
+
+	public function login(Request $req) {
+		// Get data from form
+		$usr = $req->input('username');
+		$pwd = $req->input('password');
+		
+		$server = "localhost";
+		$username = "hoangnv";
+		$password = "bkcs2022";
+		$database = "transcoding";
+
+		$conn = mysqli_connect($server, $username, $password, $database);
+
+		if (!$conn) {
+			die("Connection failed: " . mysqli_connect_error());
+		}
+
+		$sql = "SELECT password FROM accounts WHERE username = '" . $usr . "';";
+		$result = mysqli_query($conn, $sql);
+		if (mysqli_num_rows($result) > 0) {
+			$row = mysqli_fetch_assoc($result);
+			$verify = password_verify($pwd, $row["password"]);
+			if ($verify) {
+				echo 'Login successfully';
+			} else {
+				echo 'Wrong password';
+			}
+		} else {
+			echo 'Username does not exist';
+		}
+
+		mysqli_close($conn);
+		header("refresh: 3; url=/");
 	}
 }
