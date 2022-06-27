@@ -16,7 +16,7 @@
             <div style="width: 230px;">
               <div class="area-header">
                 <h6 style="float: left;">Areas Management</h6>
-                <span class="add-area" data-toggle="modal" data-target="#new-area"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span>
+                <!-- <span class="add-area" data-toggle="modal" data-target="#new-area"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span> -->
               </div>
               <!-- <div class="dropdown more-option">
                 <button class="btn-more" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
@@ -160,7 +160,21 @@
                 <a class="item-menu item-chil camera-item" cam-id=""><i id="" class="fa fa-circle active-on cam-status-tree" aria-hidden="true"></i><i class="fa fa-video-camera" aria-hidden="true"></i> <span class="option-text">DS-2CD2121G0-I3</span></a>
               </div> -->
               <div style="padding:10px">
-                <input placeholder="Camera ID" type="text" id="cam-id" class="input-edit modol-text">
+                <!-- <input placeholder="Camera ID" type="text" id="cam-id" class="input-edit modol-text"> -->
+                <select id="cam-id" class="form-control white-color">
+                  <option disabled selected value> -- Select a camera -- </option>
+                    <?php
+                      $conn = mysqli_connect("localhost", "hoangnv", "bkcs2022", "transcoding");
+                      if (!$conn) {
+                          die("Connection failed: " . mysqli_connect_error());
+                      }
+                      $result = mysqli_query($conn, "SELECT stream_input_camera FROM streams GROUP BY stream_input_camera");
+                      while ($row = mysqli_fetch_assoc($result)) {
+                          echo '<option class="white-color">'. $row["stream_input_camera"] .'</option>';
+                      }
+                      mysqli_close($conn);
+                    ?>
+                </select>
                 <button type="button" class="btn btn-model apply" onclick="addLive($('#cam-id').val())">Apply</button>
               </div>
             </div>

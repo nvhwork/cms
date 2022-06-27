@@ -1,16 +1,23 @@
 @extends('../layouts/index')
 @section('content')
-    <?php
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        if (!isset($_SESSION['role'])) {
-            header("refresh: 0, url=/login");
-            exit;
-        }
-    ?>
     <div class="content-camera">
         <div class="d-flex flex-column">
+            <?php
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+                if (!isset($_SESSION['role'])) {
+                    header("refresh: 0, url=/login");
+                    exit;
+                } else {
+                    $sess = $_SESSION['role'];
+                    if ($sess !== 'Administrator') {
+                        echo '<h1>You don\'t have permission to access this site</h1>';
+                        header("refresh: 3, url=/");
+                        exit;
+                    }
+                }
+            ?>
             <div class="p-3">
                 <h1 style="text-align: center;">Transcoding Streams</h1>
                 <a href="/streams/add" class="btn btn-success">Create a new stream to transcode camera</a>

@@ -108,7 +108,8 @@ class ApiEdgeController extends Controller
 		$cmd = OPERATION_PATH . 'camera-add ' . PUBLIC_PATH . $file;
 		// echo $cmd . '<br><br>';
 		$output = shell_exec($cmd);
-		echo $output;
+		unlink(PUBLIC_PATH . $file);
+		echo '<h1>' . $output . '</h1>';
 		header("refresh: 3; url=/cameras");
 		exit();
 	}
@@ -122,9 +123,9 @@ class ApiEdgeController extends Controller
 		$msg = 'Update: ';
 
 		if (mysqli_query($conn, $sql)) {
-			$msg = 'Camera deleted: ' . $cam_name;
+			$msg = '<h1>Camera deleted: ' . $cam_name . '</h1>';
 		} else {
-			$msg = 'Error deleting camera: ' . mysqli_error($conn);
+			$msg = '<h1>Error deleting camera: ' . mysqli_error($conn) . '</h1>';
 		}
 
 		mysqli_close($conn);
@@ -174,9 +175,9 @@ class ApiEdgeController extends Controller
 				. $streamCodec . "', " . $streamBitrate . ");";
 		
 		if (mysqli_query($conn, $sql)) {
-			echo "Add stream completed!";
+			echo "<h1>Add stream completed!</h1>";
 		} else {
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			echo "<h1>Error: " . $sql . "</h1><br>" . mysqli_error($conn);
 		}
 
 		mysqli_close($conn);
@@ -193,9 +194,9 @@ class ApiEdgeController extends Controller
 		$msg = 'Update: ';
 
 		if (mysqli_query($conn, $sql)) {
-			$msg = 'Stream deleted: ' . $stream_id;
+			$msg = '<h1>Stream deleted: ' . $stream_id . '</h1>';
 		} else {
-			$msg = 'Error deleting camera: ' . mysqli_error($conn);
+			$msg = '<h1>Error deleting camera: ' . mysqli_error($conn) . '</h1>';
 		}
 
 		mysqli_close($conn);
@@ -234,9 +235,9 @@ class ApiEdgeController extends Controller
 					. $hashPwd . "', '" . $role . "');";
 			
 			if (mysqli_query($conn, $sql)) {
-				echo "Add account completed!";
+				echo "<h1>Add account completed!</h1>";
 			} else {
-				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+				echo "<h1>Error: " . $sql . "</h1><br>" . mysqli_error($conn);
 			}
 	
 			mysqli_close($conn);
@@ -270,12 +271,12 @@ class ApiEdgeController extends Controller
 			if ($verify) {
 				$_SESSION['username'] = $usr;
 				$_SESSION['role'] = $row["role"];
-				echo 'Login successfully';
+				echo '<h1>Login successfully</h1>';
 			} else {
-				echo 'Wrong password';
+				echo '<h1>Wrong password</h1>';
 			}
 		} else {
-			echo 'Username does not exist';
+			echo '<h1>Username does not exist</h1>';
 		}
 
 		mysqli_close($conn);
@@ -287,7 +288,7 @@ class ApiEdgeController extends Controller
 		unset($_SESSION['username']);
 		unset($_SESSION['role']);
 
-		echo 'Log out successfully!';
+		echo '<h1>Log out successfully!</h1>';
 		header("refresh: 3; url=/login");
 	}
 }

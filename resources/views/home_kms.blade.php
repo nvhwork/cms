@@ -1,5 +1,10 @@
 @extends('../layouts/index')
 @section('content')
+    <?php
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    ?>
     <div class="content-camera">
         <div class="home-kms">
         	<div class="row row-content">

@@ -94,7 +94,10 @@
             <div class="sidenav">
                 <div style="width: 230px;">
                     <a href="/" class="item-menu"><i class="fa fa-home" aria-hidden="true"></i> &nbsp; <span class="option-text">Home</span></a>
-                    <button class="dropdown-btn item-menu"><i class="fa fa-video-camera" aria-hidden="true"></i> &nbsp; <span class="option-text">Device Management <i class="fa fa-caret-down"></i></span></button>
+                    <button class="dropdown-btn item-menu">
+                        <i class="fa fa-video-camera" aria-hidden="true"></i> &nbsp; 
+                        <span class="option-text">Device Management <i class="fa fa-caret-down"></i></span>
+                    </button>
                     <div class="dropdown-container">
                         <a href="/cameras" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Cameras</span></a>
                         <a href="/streams" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Streams</span></a>
@@ -120,7 +123,6 @@
 
         </div>
         <div id="background-black"></div>
-        <?php var_dump($_SESSION) ?>
 
         <script>
             $(".event-class").click(function() {

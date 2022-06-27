@@ -7,6 +7,12 @@
         if (!isset($_SESSION['role'])) {
             header("refresh: 0, url=/login");
             exit;
+        } else {
+            $sess = $_SESSION['role'];
+            if ($sess !== 'Administrator') {
+                echo "You don't have permission to access this site";
+                exit;
+            }
         }
     ?>
     <div class="content-camera p-flex flex-column">
