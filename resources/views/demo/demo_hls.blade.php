@@ -332,12 +332,14 @@
     function refreshScreen(frame_id, cam_id){
       console.log(this);
       var video = document.getElementById('video'+frame_id);
-      var videoSrc = 'get-file-hls/' + cam_id + '/index.m3u8';
+      // var videoSrc = 'get-file-hls/' + cam_id + '/index.m3u8';
+      var videoSrc = '/hls/' + cam_id + '/master.m3u8';
       if (Hls.isSupported() && video !== undefined && hlsList[frame_id] !== undefined) {
-        console.log("start load cam")
+        console.log(cam_id + ": Start loading");
+        // console.log(cam_id + ': ' + video.videoWidth + 'x' + videoHeight);
         hlsList[frame_id].attachMedia(video);
       } else {
-        console.log("not loading")
+        console.log(cam_id + ": Not loading");
       }
     }
 
@@ -359,28 +361,29 @@
                       '<div class="cam-option">'+
                         '<div class="bg-frame">'+
                           '<div class="head-liveview">'+
-                            '<div class="cam-model">Camera: '+cam_id+'</div>'+
+                            '<div class="cam-model" id="cam-'+cam_id+'"></div>'+
                             '<div class="option-preview" onclick={closeLiveView("'+frame_id+'")} camid="'+cam_id+'"><i class="fa fa-times" aria-hidden="true"></i></div>'+
                             '<div class="option-preview" onclick={fullScreen("'+frame_id+'")} camid="'+cam_id+'"><i class="fa fa-square-o" aria-hidden="true"></i></div>'+
-                            '<div class="option-preview" camid="'+cam_id+'"><i class="fa fa-refresh" aria-hidden="true"></i></div>'+
                           '</div>'+
                         '</div>'+
                       '</div>'+
                       '<video muted autoplay playsinline id="video'+frame_id+'" class="frame-video"></video>'+
                     '</div>';
+
         await $(".cam-liveview").append(html);
         var video = document.getElementById('video'+frame_id);
         // var videoSrc = '/api/get-file-hls/'+cam_id+'_720/index.m3u8';
-        var videoSrc = '/hls/'+cam_id+'/master.m3u8';
+        var videoSrc = '/hls/' + cam_id + '/master.m3u8';
+        // var videoSrc = '/hls/' + cam_id + '/1024x576/index.m3u8';
 
 
         if (Hls.isSupported()) {
-          console.log("Browser support hls");
+          console.log("Browser support HLS");
           var hls = hlsList[frame_id] = new Hls();
           // hls.loadSource(videoSrc);
 
           hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-            console.log("video and hls.js are now bound together !");
+            console.log(cam_id + ": Video and hls.js are now bound together !");
             hls.loadSource(videoSrc);
             // hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
             //   console.log("manifest loaded, found " + data.levels.length + " quality level");
@@ -390,13 +393,13 @@
 
           hls.attachMedia(video);
           hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            console.log("on manifest parsed, play")
+            console.log(cam_id + ": On manifest parsed, play")
             video.play();
           });
 
           hls.on(Hls.Events.BUFFER_EOS, function(event, data){
             console.log(data);
-            console.log("EOS in live, agent in error, wait about 10 sec to reconnect");
+            console.log(cam_id + ": EOS in live, agent in error, wait about 10 sec to reconnect");
             video.pause();
             setTimeout(function(){
               refreshScreen(frame_id, cam_id)
@@ -405,11 +408,11 @@
 
           hls.on(Hls.Events.ERROR, function (event, data) {
             console.log(data);
-            console.log("Network error or media error, wait about 5 sec to reload");
+            console.log(cam_id + ": Network error or media error, wait about 1 sec to reload");
             video.pause();
             setTimeout(function(){
               refreshScreen(frame_id, cam_id)
-            }, 5000);
+            }, 1000);
 
             // if (data.fatal) {
 
@@ -431,6 +434,13 @@
             //   }
             // }
           });
+
+          video.onplaying = function () {
+            var width = video.videoWidth;
+            var height = video.videoHeight;
+            console.log(cam_id + ": " + width + "x" + height);
+            document.getElementById("cam-" + cam_id).innerHTML = cam_id //+ ": " + width + 'x' + height;
+          }
         }
         // video.src = videoSrc;
         // video.play();
@@ -447,7 +457,7 @@
       }
     }
 
-    viewAllStreams();
+    // viewAllStreams();
 
 
   </script>
