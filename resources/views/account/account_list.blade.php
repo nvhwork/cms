@@ -31,29 +31,31 @@
                     $result = mysqli_query($conn, "SELECT username, role FROM accounts");
                     $index = 0;
 
-                    echo "  <table class=\"p-2 table table-hover table-dark\">
-                                <thead class=\"thead-light\">
+                    echo '  <table class="p-2 table table-hover table-dark">
+                                <thead class="thead-light">
                                     <tr>
-                                        <th scope=\"col\">#</th>
-                                        <th scope=\"col\">Username</th>
-                                        <th scope=\"col\">Role</th>
-                                        <th scope=\"col\"></th>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
-                                <tbody>    ";
+                                <tbody>    ';
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "  <tr>
-                                    <th scope=\"row\">". ++$index ."</th>
-                                    <td>". $row["username"] ."</td>
-                                    <td>". $row["role"] ."</td>
-                                    <td>
-                                        <a href=\"/api/delete-account/". $row["username"] .
-                                        "\" class=\"btn btn-danger\">Delete</a>
-                                    </td>
-                                </tr>   ";
+                        if ($_SESSION['username'] === $row['username']) {
+                            $delBtn = '<button class="btn btn-danger" disabled>Delete</a>';
+                        } else {
+                            $delBtn = '<a href="/api/delete-account/'. $row["username"] .'" class="btn btn-danger">Delete</a>';
+                        }
+                        echo '  <tr>
+                                    <th scope="row">'. ++$index .'</th>
+                                    <td>'. $row["username"] .'</td>
+                                    <td>'. $row["role"] .'</td>
+                                    <td>'. $delBtn .'</td>
+                                </tr>   ';
                     }
-                    echo "      </tbody>
-                            </table>    ";
+                    echo '      </tbody>
+                            </table>    ';
                     mysqli_close($conn);
                 ?>
             </div>

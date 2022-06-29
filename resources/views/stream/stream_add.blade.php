@@ -56,7 +56,7 @@
                                 <option disabled>H.265</option>
                             </select>
                         </div>
-                    </div>                    
+                    </div>
                     <div class="form-group col-md-12">
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <a href="/streams" class="btn btn-success">Back to stream list</a>
