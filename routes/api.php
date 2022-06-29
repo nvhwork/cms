@@ -14,26 +14,28 @@ use Iman\Streamer\VideoStreamer;
 |
 */
 
-Route::post('upload-to-cache', 'ApiEdgeController@uploadToCache');
+Route::post('/upload-to-cache', 'ApiEdgeController@uploadToCache');
 
-Route::post('add-camera', 'ApiEdgeController@addCamera');
+Route::get('/notification/{nav}/{msg}', 'ApiEdgeController@notify');
+
+Route::post('/add-camera', 'ApiEdgeController@addCamera');
 
 Route::get('/delete-camera/{cam_name}', 'ApiEdgeController@deleteCamera');
 
-Route::get('/notify-camera/{msg}', 'ApiEdgeController@notifyCamera');
-
-Route::post('add-stream', 'ApiEdgeController@addStream');
+Route::post('/add-stream', 'ApiEdgeController@addStream');
 
 Route::get('/delete-stream/{stream_id}', 'ApiEdgeController@deleteStream');
 
-Route::get('/notify-stream/{msg}', 'ApiEdgeController@notifyStream');
+Route::post('/register', 'ApiEdgeController@registerAccount');
 
-Route::post('register', 'ApiEdgeController@registerAccount');
+Route::post('/login', 'ApiEdgeController@login');
 
-Route::post('login', 'ApiEdgeController@login');
+Route::get('/logout', 'ApiEdgeController@logout');
 
-Route::get('logout', 'ApiEdgeController@logout');
+Route::post('/change-pwd', 'ApiEdgeController@changePwd');
+
+Route::get('/delete-account/{usr}', 'ApiEdgeController@deleteAccount');
 
 Route::get('/get-file-hls/{cam_id}/{file_name}', 'CameraController@getFileHls');
 
-Route::get('get-stream-list', 'CameraController@getStreamList');
+Route::get('/get-stream-list', 'CameraController@getStreamList');

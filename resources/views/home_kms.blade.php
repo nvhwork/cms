@@ -9,7 +9,7 @@
         <div class="home-kms">
         	<div class="row row-content">
         		<div class="row-title">
-        			<div class="title-list-proxy">Device & Server</div>
+        			<h3>Device & Server</h3>
         		</div>
                 <div class="col-sm-3 col-content">
                     <a href="/cameras">
@@ -87,24 +87,24 @@
                             <p>See the list of DASCAM Kafka Brokers</p>
                         </div>
                     </a>
-                </div>
+                </div> -->
         	</div>
         	<div class="row row-content">
         		<div class="row-title">
-        			<div class="title-list-proxy">User & Event</div>
+        			<h3>User & Event</h3>
         		</div>
                 <div class="col-sm-3 col-content">
-                    <a href="accountlist">
+                    <a href="/accounts">
                         <div class="icon-info">
                             <img src="/js-css/img/icon/existing_user.png" class="icon-custom">
                         </div>
                         <div class="title-content">
                             <label>User Management</label>
-                            <p>See the list of users and their access history</p>
+                            <p>See the list of users</p>
                         </div>
                     </a>
                 </div>
-        		<div class="col-sm-3 col-content">
+        		<!-- <div class="col-sm-3 col-content">
                     <a href="listevent">
             			<div class="icon-info">
             				<img src="/js-css/img/icon/forbidden.png" class="icon-custom">
@@ -124,8 +124,8 @@
                             <label>Events</label>
                             <p>See the list of events</p>
                         </div>
-                    </a>
-                </div> -->
+                    </a> -->
+                </div>
         	</div>
         </div>
     </div> 

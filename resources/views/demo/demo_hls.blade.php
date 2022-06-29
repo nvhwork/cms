@@ -16,7 +16,6 @@
             <div style="width: 230px;">
               <div class="area-header">
                 <h6 style="float: left;">Areas Management</h6>
-                <!-- <span class="add-area" data-toggle="modal" data-target="#new-area"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span> -->
               </div>
               <!-- <div class="dropdown more-option">
                 <button class="btn-more" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>

@@ -90,6 +90,12 @@ class ApiEdgeController extends Controller
         return $cams;
     }
 
+	public function notify($nav, $msg) {
+		echo '<h1>' . $msg . '</h1>';
+		header("refresh: 3; url=/" . $nav);
+		exit();
+	}
+
 	public function addCamera(Request $req) {
 		// Get data from form
 		$camName = $req->input('camera_name');
@@ -120,22 +126,16 @@ class ApiEdgeController extends Controller
 			die('Connection failed: ' . mysqli_connect_error());
 		}
 		$sql = 'DELETE FROM cameras WHERE camera_name="' . $cam_name . '"';
-		$msg = 'Update: ';
+		$msg = '';
 
 		if (mysqli_query($conn, $sql)) {
-			$msg = '<h1>Camera deleted: ' . $cam_name . '</h1>';
+			$msg = 'Camera deleted: ' . $cam_name;
 		} else {
-			$msg = '<h1>Error deleting camera: ' . mysqli_error($conn) . '</h1>';
+			$msg = 'Error deleting camera: ' . mysqli_error($conn);
 		}
 
 		mysqli_close($conn);
-		header("refresh: 0; url=/api/notify-camera/" . $msg);
-		exit();
-	}
-
-	public function notifyCamera($msg) {
-		echo $msg;
-		header("refresh: 3; url=/cameras");
+		header("refresh: 0; url=/api/notification/cameras/" . $msg);
 		exit();
 	}
 
@@ -194,19 +194,13 @@ class ApiEdgeController extends Controller
 		$msg = 'Update: ';
 
 		if (mysqli_query($conn, $sql)) {
-			$msg = '<h1>Stream deleted: ' . $stream_id . '</h1>';
+			$msg = 'Stream deleted: ' . $stream_id;
 		} else {
-			$msg = '<h1>Error deleting camera: ' . mysqli_error($conn) . '</h1>';
+			$msg = 'Error deleting stream: ' . mysqli_error($conn);
 		}
 
 		mysqli_close($conn);
-		header("refresh: 0; url=/api/notify-stream/" . $msg);
-	}
-
-	public function notifyStream($msg) {
-		echo $msg;
-		header("refresh: 3; url=/streams");
-		exit();
+		header("refresh: 0; url=/api/notification/streams" . $msg);
 	}
 
 	public function registerAccount(Request $req) {
@@ -217,7 +211,7 @@ class ApiEdgeController extends Controller
 		$confPwd = $req->input('confPwd');
 
 		if (strcmp($pwd, $confPwd) != 0) {
-			echo 'The 2 input passwords are not identical!';
+			echo '<h1>The 2 input passwords are not identical!</h1>';
 		} else {
 			$server = "localhost";
 			$username = "hoangnv";
@@ -239,14 +233,18 @@ class ApiEdgeController extends Controller
 			} else {
 				echo "<h1>Error: " . $sql . "</h1><br>" . mysqli_error($conn);
 			}
-	
 			mysqli_close($conn);
-			header("refresh: 3; url=/");
+
 		}
+	
+		header("refresh: 3; url=/accounts");
+		exit();
 	}
 
 	public function login(Request $req) {
-		session_start();
+		if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
 		// Get data from form
 		$usr = $req->input('username');
@@ -281,14 +279,101 @@ class ApiEdgeController extends Controller
 
 		mysqli_close($conn);
 		header("refresh: 3; url=/");
+		exit();
 	}
 
 	public function logout() {
-		session_start();
+		if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 		unset($_SESSION['username']);
 		unset($_SESSION['role']);
 
 		echo '<h1>Log out successfully!</h1>';
 		header("refresh: 3; url=/login");
+		exit;
+	}
+
+	public function changePwd(Request $req) {
+		if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+		
+		if (!isset($_SESSION['username'])) {
+			echo '<h1>You are not signing in!</h1>';
+			header("refresh: 3; url=/login");
+			exit();
+		}
+
+		$usr = $_SESSION['username'];
+		$curPwd = $req->input('curPwd');
+		$newPwd = $req->input('newPwd');
+		$confPwd = $req->input('confPwd');
+
+		$server = "localhost";
+		$username = "hoangnv";
+		$password = "bkcs2022";
+		$database = "transcoding";
+
+		$conn = mysqli_connect($server, $username, $password, $database);
+
+		if (!$conn) {
+			die("Connection failed: " . mysqli_connect_error());
+		}
+
+		$sqlCheckPwd = "SELECT password FROM accounts WHERE username = '" . $usr . "';";
+		$result = mysqli_query($conn, $sqlCheckPwd);
+		if (mysqli_num_rows($result) > 0) {
+			$row = mysqli_fetch_assoc($result);
+			$verify = password_verify($curPwd, $row["password"]);
+			if (!$verify) {
+				echo '<h1>Your current password is not correct! Enter again</h1>';
+				mysqli_close($conn);
+				header("refresh: 3; url=/change-password");
+				exit();
+			} else {
+				if ($curPwd === $newPwd) {
+					echo '<h1>New password and Current password are identical! Enter again!</h1>';
+					mysqli_close($conn);
+					header("refresh: 3; url=/change-password");
+					exit();
+				} else if ($newPwd !== $confPwd) {
+					echo '<h1>New password and Confirmed new password are not identical! Enter again!</h1>';
+					mysqli_close($conn);
+					header("refresh: 3; url=/change-password");
+					exit();
+				} else {
+					$sqlUpdatePwd = "UPDATE accounts SET password = '" . $newPwd . "' WHERE username = '" . $usr . "';";
+					if (mysqli_query($conn, $sqlUpdatePwd)) {
+						echo '<h1>Update password successfully</h1>';
+					} else {
+						echo '<h1>Error updating password: ' . mysqli_error($conn) . '</h1>';
+					}
+				}
+			}
+		} else {
+			echo '<h1>User invalid</h1>';
+		}
+		mysqli_close($conn);
+		header("refresh: 3; url=/");
+		exit();
+	}
+
+	public function deleteAccount($usr) {
+		$conn = mysqli_connect('localhost', 'hoangnv', 'bkcs2022', 'transcoding');
+		if ($conn->connect_errno > 0) {
+			die('Connection failed: ' . mysqli_connect_error());
+		}
+		$sql = 'DELETE FROM accounts WHERE username = "' . $usr . '"';
+		$msg = 'Update: ';
+
+		if (mysqli_query($conn, $sql)) {
+			$msg = 'Account deleted: ' . $usr;
+		} else {
+			$msg = 'Error deleting account: ' . mysqli_error($conn);
+		}
+
+		mysqli_close($conn);
+		header("refresh: 0; url=/api/notification/accounts/" . $msg);
 	}
 }

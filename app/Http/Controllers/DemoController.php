@@ -31,10 +31,18 @@ class DemoController extends Controller
   }
 
   public function login() {
-    return view ('account.login');
+    return view('account.login');
   }
 
   public function register() {
-    return view ('account.register');
+    return view('account.register');
+  }
+
+  public function changePwd() {
+    return view('account.change_pwd');
+  }
+
+  public function listAcc() {
+    return view('account.account_list');
   }
 }

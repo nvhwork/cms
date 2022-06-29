@@ -52,7 +52,7 @@
                                         <div class="user-login user-name">
                                             <span class="span-avatar"><i class="fa fa-user" aria-hidden="true"></i> &nbsp;' . $usr . '</span>
                                         </div>
-                                        <a href="changepassword" class="white-color">
+                                        <a href="change-password" class="white-color">
                                             <div class="user-setting">
                                                 <small><i class="fa fa-unlock-alt white-color"></i> &nbsp;Change the password</small>
                                             </div>
@@ -113,6 +113,7 @@
                         <a href="/event-burning-smoke" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Burning smoke</span></a>
                     </div> -->
                     <a href="/demo-hls" class="item-menu"><i class="fa fa-desktop" aria-hidden="true"></i> &nbsp; <span class="option-text">Monitor</span></a>
+                    <a href="/accounts" class="item-menu"><i class="fa fa-group" aria-hidden="true"></i> &nbsp; <span class="option-text">User Management</span></a>
                 </div>
             </div>
             <div id="content">

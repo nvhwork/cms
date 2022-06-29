@@ -20,3 +20,5 @@ Route::get('/streams', 'DemoController@listStream');
 Route::get('/streams/add', 'DemoController@addStream');
 Route::get('/login', 'DemoController@login');
 Route::get('/register', 'DemoController@register');
+Route::get('/change-password', 'DemoController@changePwd');
+Route::get('/accounts', 'DemoController@listAcc');
