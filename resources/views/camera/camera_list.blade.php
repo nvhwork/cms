@@ -21,6 +21,7 @@
             <div class="p-3">
                 <h1 style="text-align: center;">Camera</h1>
                 <a href="/cameras/add" class="btn btn-success">Add a new camera</a>
+                <a href="/streams" class="btn btn-info">Check the list of transcoding streams</a>
             </div>
             <div class="p-3">
                 <?php

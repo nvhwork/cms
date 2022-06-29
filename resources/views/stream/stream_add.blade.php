@@ -53,7 +53,7 @@
                             <label for="stream_codec">Codec</label>
                             <select name="stream_codec" id="stream_codec" class="form-control">
                                 <option>H.264</option>
-                                <option>H.265</option>
+                                <option disabled>H.265</option>
                             </select>
                         </div>
                     </div>                    

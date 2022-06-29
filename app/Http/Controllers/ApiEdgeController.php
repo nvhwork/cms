@@ -24,9 +24,6 @@ use Tymon\JWTAuth\Claims\NotBefore;
 use Tymon\JWTAuth\Claims\JwtId;
 use Tymon\JWTAuth\Claims\Subject;
 
-define("PUBLIC_PATH", "/home/e-ai/transcoding/cms/public/");
-define("OPERATION_PATH", "/home/e-ai/transcoding/transcode_streams/operations/");
-
 class ApiEdgeController extends Controller
 {
     public function uploadToCache(Request $req){
@@ -94,113 +91,6 @@ class ApiEdgeController extends Controller
 		echo '<h1>' . $msg . '</h1>';
 		header("refresh: 3; url=/" . $nav);
 		exit();
-	}
-
-	public function addCamera(Request $req) {
-		// Get data from form
-		$camName = $req->input('camera_name');
-		$camUrl = $req->input('camera_url');
-		$data = array(
-			"camera_name" => $camName,
-			"camera_url" => $camUrl
-		);
-		$dataJson = json_encode($data);
-		// echo $dataJson . '<br><br>';
-
-		$file = 'cameraAdd.json';
-		file_put_contents($file, $dataJson);
-
-		// Execute the camera adding operation
-		$cmd = OPERATION_PATH . 'camera-add ' . PUBLIC_PATH . $file;
-		// echo $cmd . '<br><br>';
-		$output = shell_exec($cmd);
-		unlink(PUBLIC_PATH . $file);
-		echo '<h1>' . $output . '</h1>';
-		header("refresh: 3; url=/cameras");
-		exit();
-	}
-
-	public function deleteCamera($cam_name) {
-		$conn = mysqli_connect('localhost', 'hoangnv', 'bkcs2022', 'transcoding');
-		if ($conn->connect_errno > 0) {
-			die('Connection failed: ' . mysqli_connect_error());
-		}
-		$sql = 'DELETE FROM cameras WHERE camera_name="' . $cam_name . '"';
-		$msg = '';
-
-		if (mysqli_query($conn, $sql)) {
-			$msg = 'Camera deleted: ' . $cam_name;
-		} else {
-			$msg = 'Error deleting camera: ' . mysqli_error($conn);
-		}
-
-		mysqli_close($conn);
-		header("refresh: 0; url=/api/notification/cameras/" . $msg);
-		exit();
-	}
-
-	public function addStream(Request $req) {
-		// Get data from form
-		$streamInput = $req->input('stream_input_camera');
-		$streamRes = $req->input('stream_resolution');
-		$streamCodec = $req->input('stream_codec');
-
-		// Extract resolution
-		$res = explode("x", $streamRes);
-		$streamWidth = intval($res[0]);
-		$streamHeight = intval($res[1]);
-
-		// Create stream ID and path
-		$streamId = $streamInput . '_' . $streamHeight;
-		// $streamPath = '/' . $streamInput . '/' . $streamRes;
-		
-		// Set bitrate value
-		if ($streamHeight <= 360) {
-			$streamBitrate = 1000000;
-		} elseif ($streamHeight <= 576) {
-			$streamBitrate = 2000000;
-		} elseif ($streamHeight <= 720) {
-			$streamBitrate = 3000000;
-		} else {
-			$streamBitrate = 4000000;
-		}
-
-		$conn = mysqli_connect('localhost', 'hoangnv', 'bkcs2022', 'transcoding');
-		if ($conn->connect_errno > 0) {
-			die('Connection failed: ' . mysqli_connect_error());
-		}
-		$sql = "INSERT INTO streams VALUES ('" 
-				. $streamId . "', '" . $streamInput . "', "
-				. $streamWidth . ", " . $streamHeight . ", '"
-				. $streamCodec . "', " . $streamBitrate . ");";
-		
-		if (mysqli_query($conn, $sql)) {
-			echo "<h1>Add stream completed!</h1>";
-		} else {
-			echo "<h1>Error: " . $sql . "</h1><br>" . mysqli_error($conn);
-		}
-
-		mysqli_close($conn);
-		header("refresh: 3; url=/streams");
-		exit();
-	}
-
-	public function deleteStream($stream_id) {
-		$conn = mysqli_connect('localhost', 'hoangnv', 'bkcs2022', 'transcoding');
-		if ($conn->connect_errno > 0) {
-			die('Connection failed: ' . mysqli_connect_error());
-		}
-		$sql = 'DELETE FROM streams WHERE stream_id="' . $stream_id . '"';
-		$msg = 'Update: ';
-
-		if (mysqli_query($conn, $sql)) {
-			$msg = 'Stream deleted: ' . $stream_id;
-		} else {
-			$msg = 'Error deleting stream: ' . mysqli_error($conn);
-		}
-
-		mysqli_close($conn);
-		header("refresh: 0; url=/api/notification/streams" . $msg);
 	}
 
 	public function registerAccount(Request $req) {

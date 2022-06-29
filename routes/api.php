@@ -18,14 +18,6 @@ Route::post('/upload-to-cache', 'ApiEdgeController@uploadToCache');
 
 Route::get('/notification/{nav}/{msg}', 'ApiEdgeController@notify');
 
-Route::post('/add-camera', 'ApiEdgeController@addCamera');
-
-Route::get('/delete-camera/{cam_name}', 'ApiEdgeController@deleteCamera');
-
-Route::post('/add-stream', 'ApiEdgeController@addStream');
-
-Route::get('/delete-stream/{stream_id}', 'ApiEdgeController@deleteStream');
-
 Route::post('/register', 'ApiEdgeController@registerAccount');
 
 Route::post('/login', 'ApiEdgeController@login');
@@ -39,3 +31,13 @@ Route::get('/delete-account/{usr}', 'ApiEdgeController@deleteAccount');
 Route::get('/get-file-hls/{cam_id}/{file_name}', 'CameraController@getFileHls');
 
 Route::get('/get-stream-list', 'CameraController@getStreamList');
+
+Route::post('/add-camera', 'CameraController@addCamera');
+
+Route::get('/delete-camera/{cam_name}', 'CameraController@deleteCamera');
+
+Route::post('/add-stream', 'CameraController@addStream');
+
+Route::get('/delete-stream/{stream_id}', 'CameraController@deleteStream');
+
+Route::get('/test', 'CameraController@testPhp');
