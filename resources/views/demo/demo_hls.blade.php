@@ -384,7 +384,7 @@
                       '<div class="cam-option">'+
                         '<div class="bg-frame">'+
                           '<div class="head-liveview">'+
-                            '<div class="cam-model" id="cam-'+cam_id+'"></div>'+
+                            '<div class="cam-model" id="cam-'+cam_id+'">'+cam_id+'</div>'+
                             '<div class="option-preview" onclick={closeLiveView("'+frame_id+'")} camid="'+cam_id+'"><i class="fa fa-times" aria-hidden="true"></i></div>'+
                             '<div class="option-preview" onclick={fullScreen("'+frame_id+'")} camid="'+cam_id+'"><i class="fa fa-square-o" aria-hidden="true"></i></div>'+
                           '</div>'+
@@ -462,7 +462,7 @@
             var width = video.videoWidth;
             var height = video.videoHeight;
             console.log(cam_id + ": " + width + "x" + height);
-            document.getElementById("cam-" + cam_id).innerHTML = cam_id //+ ": " + width + 'x' + height;
+            // document.getElementById("cam-" + cam_id).innerHTML = cam_id + ": " + width + 'x' + height;
           }
         }
         // video.src = videoSrc;
