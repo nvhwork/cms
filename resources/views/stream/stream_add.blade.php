@@ -47,6 +47,7 @@
                                 <option>640x360</option>
                                 <option>1024x576</option>
                                 <option>1280x720</option>
+                                <option>1920x1080</option>
                             </select>
                         </div>
                         <div class="col-md-6">

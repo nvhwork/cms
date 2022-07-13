@@ -94,6 +94,7 @@
             <div class="sidenav">
                 <div style="width: 230px;">
                     <a href="/" class="item-menu"><i class="fa fa-home" aria-hidden="true"></i> &nbsp; <span class="option-text">Home</span></a>
+                    <a href="/demo-hls" class="item-menu"><i class="fa fa-desktop" aria-hidden="true"></i> &nbsp; <span class="option-text">Monitor</span></a>
                     <button class="dropdown-btn item-menu">
                         <i class="fa fa-video-camera" aria-hidden="true"></i> &nbsp; 
                         <span class="option-text">Device Management <i class="fa fa-caret-down"></i></span>
@@ -112,7 +113,6 @@
                         <a href="/face-recognition/0/<?php echo date("Y-m-d"); ?>/<?php echo date("Y-m-d",strtotime("+1 day")) ?>" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Face Recognition</span></a>
                         <a href="/event-burning-smoke" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Burning smoke</span></a>
                     </div> -->
-                    <a href="/demo-hls" class="item-menu"><i class="fa fa-desktop" aria-hidden="true"></i> &nbsp; <span class="option-text">Monitor</span></a>
                     <a href="/accounts" class="item-menu"><i class="fa fa-group" aria-hidden="true"></i> &nbsp; <span class="option-text">User Management</span></a>
                 </div>
             </div>

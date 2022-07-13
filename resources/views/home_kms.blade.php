@@ -12,6 +12,17 @@
         			<h3>Device & Server</h3>
         		</div>
                 <div class="col-sm-3 col-content">
+                    <a href="/demo-hls">
+                        <div class="icon-info">
+                            <img src="/js-css/img/icon/monitor.png" class="icon-custom">
+                        </div>
+                        <div class="title-content">
+                            <label>Monitor</label>
+                            <p>View the streams transcoded from cameras</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-3 col-content">
                     <a href="/cameras">
                         <div class="icon-info">
                             <img src="/js-css/img/icon/webcam1.png" class="icon-custom">
@@ -30,17 +41,6 @@
                         <div class="title-content">
                             <label>Streams</label>
                             <p>See the list of currently transcoding streams</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-3 col-content">
-                    <a href="/demo-hls">
-                        <div class="icon-info">
-                            <img src="/js-css/img/icon/monitor.png" class="icon-custom">
-                        </div>
-                        <div class="title-content">
-                            <label>Monitor</label>
-                            <p>View the streams transcoded from cameras</p>
                         </div>
                     </a>
                 </div>

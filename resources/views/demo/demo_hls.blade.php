@@ -378,6 +378,9 @@
       //   notifiWarning("This camera is already displayed");
       // } 
       // else{
+        var videoSrc = '/hls/' + cam_id + '/master.m3u8';
+        // var videoSrc = '/api/get-file-hls/'+cam_id+'_720/index.m3u8';
+        // var videoSrc = '/hls/' + cam_id + '/1024x576/index.m3u8';
         var html =  '<div class="live-view" id="'+frame_id+'">'+
                       '<img class="loading-icon" src="js-css/img/loading2.gif">'+
                       '<div class="cam-option">'+
@@ -394,9 +397,6 @@
 
         await $(".cam-liveview").append(html);
         var video = document.getElementById('video'+frame_id);
-        // var videoSrc = '/api/get-file-hls/'+cam_id+'_720/index.m3u8';
-        var videoSrc = '/hls/' + cam_id + '/master.m3u8';
-        // var videoSrc = '/hls/' + cam_id + '/1024x576/index.m3u8';
 
 
         if (Hls.isSupported()) {
@@ -479,8 +479,11 @@
       }
     }
 
-    // viewAllStreams();
-
+    <?php
+      if (strcmp($_SESSION['role'], "Administrator") == 0) {
+        echo 'viewAllStreams();';
+      }
+    ?>
 
   </script>
 @endsection

@@ -147,7 +147,12 @@ class CameraController extends Controller
 		$streamHeight = intval($res[1]);
 
 		// Create stream ID and path
-		$streamId = $streamInput . '_' . $streamHeight;
+		$streamId = $streamInput . '_';
+		$zeroBufferLength = 6 - strlen($res[1]);
+		for ($x = 0; $x < $zeroBufferLength; $x++) {
+			$streamId .= '0';
+		}
+		$streamId .= $streamHeight;
 		
 		// Set bitrate value
 		if ($streamHeight <= 360) {
@@ -198,24 +203,6 @@ class CameraController extends Controller
 
 		mysqli_close($conn);
 		header("refresh: 0; url=/api/notification/streams/" . $msg);
-	}
-
-	public function testPhp() {
-		$output1 = shell_exec('python3 -V');
-		echo $output1 . '<br><br>';
-
-		$output2 = shell_exec("cd /home/e-ai/transcoding/test\npwd");
-		echo $output2 . '<br><br>';
-
-		$cmd1 = '/usr/bin/gst-launch-1.0 rtspsrc location="rtsp://admin:secam123@192.168.10.101" ! rtph264depay ! \
-				nvv4l2decoder ! n.sink_0 nvstreammux name=n width=1280 height=720 batch-size=1 ! \
-				nvv4l2h264enc bitrate=3000000 maxperf-enable=true disable-cabac=true idrinterval=60 ! \
-				h264parse ! mpegtsmux ! hlssink playlist-location=master.m3u8 target-duration=1 &';
-		$cmd2 = 'ls -l';
-		// system($cmd2, $output3);
-		$output3 = shell_exec($cmd1);
-		echo '<br><br>' . $output3 . '<br><br>';
-		
 	}
 
 }
