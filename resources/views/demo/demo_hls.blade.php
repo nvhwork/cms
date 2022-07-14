@@ -373,14 +373,11 @@
       }
 
       var frame_id = Math.random().toString(36).substring(7);
-      // if(document.getElementById('live'+cam_id) != null){
-      //   snakeModel(cam_id);
-      //   notifiWarning("This camera is already displayed");
-      // } 
-      // else{
-        var videoSrc = '/hls/' + cam_id + '/master.m3u8';
-        // var videoSrc = '/api/get-file-hls/'+cam_id+'_720/index.m3u8';
-        // var videoSrc = '/hls/' + cam_id + '/1024x576/index.m3u8';
+      if(document.getElementById('live'+cam_id) != null){
+        snakeModel(cam_id);
+        notifiWarning("This camera is already displayed");
+      } 
+      else{
         var html =  '<div class="live-view" id="'+frame_id+'">'+
                       '<img class="loading-icon" src="js-css/img/loading2.gif">'+
                       '<div class="cam-option">'+
@@ -397,6 +394,9 @@
 
         await $(".cam-liveview").append(html);
         var video = document.getElementById('video'+frame_id);
+        var videoSrc = '/hls/' + cam_id + '/master.m3u8';
+        // var videoSrc = '/api/get-file-hls/'+cam_id+'_720/index.m3u8';
+        // var videoSrc = '/hls/' + cam_id + '/1024x576/index.m3u8';
 
 
         if (Hls.isSupported()) {
@@ -421,11 +421,11 @@
 
           hls.on(Hls.Events.BUFFER_EOS, function(event, data){
             console.log(data);
-            console.log(cam_id + ": EOS in live, agent in error, wait about 10 sec to reconnect");
+            console.log(cam_id + ": EOS in live, agent in error, wait about 1 sec to reconnect");
             video.pause();
             setTimeout(function(){
               refreshScreen(frame_id, cam_id)
-            }, 10000);
+            }, 1000);
           });
 
           hls.on(Hls.Events.ERROR, function (event, data) {
@@ -466,7 +466,7 @@
         }
         // video.src = videoSrc;
         // video.play();
-      // }
+      }
     }
 
     async function viewAllStreams() {
