@@ -95,6 +95,9 @@
                 <div style="width: 230px;">
                     <a href="/" class="item-menu"><i class="fa fa-home" aria-hidden="true"></i> &nbsp; <span class="option-text">Home</span></a>
                     <a href="/demo-hls" class="item-menu"><i class="fa fa-desktop" aria-hidden="true"></i> &nbsp; <span class="option-text">Monitor</span></a>
+        <?php
+            if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+                echo '
                     <button class="dropdown-btn item-menu">
                         <i class="fa fa-video-camera" aria-hidden="true"></i> &nbsp; 
                         <span class="option-text">Device Management <i class="fa fa-caret-down"></i></span>
@@ -102,18 +105,30 @@
                     <div class="dropdown-container">
                         <a href="/cameras" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Cameras</span></a>
                         <a href="/streams" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Streams</span></a>
-                        <!-- <a href="/edge-list" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">DASCAM Edges AI</span></a>
-                        <a href="/nvrlist" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">DASCAM Edge Storage</span></a> -->
                     </div>
-                    <!-- <a href="accountlist" id="account-management" class="item-menu"><i class="fa fa-user" aria-hidden="true"></i> &nbsp; <span class="option-text">User Management</span></a>
+                    <a href="/accounts" class="item-menu"><i class="fa fa-group" aria-hidden="true"></i> &nbsp; <span class="option-text">User Management</span></a>
+                ';
+            }
+        ?>
+                    <!-- <button class="dropdown-btn item-menu">
+                        <i class="fa fa-video-camera" aria-hidden="true"></i> &nbsp; 
+                        <span class="option-text">Device Management <i class="fa fa-caret-down"></i></span>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="/cameras" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Cameras</span></a>
+                        <a href="/streams" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Streams</span></a>
+                        <a href="/edge-list" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">DASCAM Edges AI</span></a>
+                        <a href="/nvrlist" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">DASCAM Edge Storage</span></a>
+                    </div>
+                    <a href="accountlist" id="account-management" class="item-menu"><i class="fa fa-user" aria-hidden="true"></i> &nbsp; <span class="option-text">User Management</span></a>
                     <a href="/firmwareversion" class="item-menu"><i class="fa fa-info-circle text-red"></i> &nbsp; <span class="option-text">Firmware version</span></a>
                     <button class="dropdown-btn item-menu"><i class="fa fa-bell" aria-hidden="true"></i> &nbsp; <span class="option-text">Notifications <i class="fa fa-caret-down"></i></span></button>
                     <div class="dropdown-container">
                         <a href="/event-detect-zone/0/<?php echo date("Y-m-d"); ?>/<?php echo date("Y-m-d",strtotime("+1 day")) ?>" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Restricted zones</span></a>
                         <a href="/face-recognition/0/<?php echo date("Y-m-d"); ?>/<?php echo date("Y-m-d",strtotime("+1 day")) ?>" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Face Recognition</span></a>
                         <a href="/event-burning-smoke" class="item-menu item-chil"><i class="fa fa-circle-o"></i> <span class="option-text">Burning smoke</span></a>
-                    </div> -->
-                    <a href="/accounts" class="item-menu"><i class="fa fa-group" aria-hidden="true"></i> &nbsp; <span class="option-text">User Management</span></a>
+                    </div>
+                    <a href="/accounts" class="item-menu"><i class="fa fa-group" aria-hidden="true"></i> &nbsp; <span class="option-text">User Management</span></a> -->
                 </div>
             </div>
             <div id="content">

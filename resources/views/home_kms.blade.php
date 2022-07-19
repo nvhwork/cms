@@ -4,6 +4,10 @@
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
+        if (!isset($_SESSION['role'])) {
+            header("refresh: 0, url=/login");
+            exit;
+        }
     ?>
     <div class="content-camera">
         <div class="home-kms">
@@ -22,6 +26,9 @@
                         </div>
                     </a>
                 </div>
+    <?php
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator') {
+            echo '
                 <div class="col-sm-3 col-content">
                     <a href="/cameras">
                         <div class="icon-info">
@@ -44,6 +51,47 @@
                         </div>
                     </a>
                 </div>
+            </div>
+        	<div class="row row-content">
+        		<div class="row-title">
+        			<h3>User & Event</h3>
+        		</div>
+                <div class="col-sm-3 col-content">
+                    <a href="/accounts">
+                        <div class="icon-info">
+                            <img src="/js-css/img/icon/existing_user.png" class="icon-custom">
+                        </div>
+                        <div class="title-content">
+                            <label>User Management</label>
+                            <p>See the list of users</p>
+                        </div>
+                    </a>
+                </div>
+            ';
+        }
+    ?>
+                <!-- <div class="col-sm-3 col-content">
+                    <a href="/cameras">
+                        <div class="icon-info">
+                            <img src="/js-css/img/icon/webcam1.png" class="icon-custom">
+                        </div>
+                        <div class="title-content">
+                            <label>Cameras</label>
+                            <p>See the list of Camera</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-3 col-content">
+                    <a href="/streams">
+                        <div class="icon-info">
+                            <img src="/js-css/img/icon/play1.png" class="icon-custom">
+                        </div>
+                        <div class="title-content">
+                            <label>Streams</label>
+                            <p>See the list of currently transcoding streams</p>
+                        </div>
+                    </a>
+                </div> -->
                 <!-- <div class="col-sm-3 col-content">
                     <a href="/edge-list">
                         <div class="icon-info">
@@ -88,7 +136,7 @@
                         </div>
                     </a>
                 </div> -->
-        	</div>
+        	<!-- </div>
         	<div class="row row-content">
         		<div class="row-title">
         			<h3>User & Event</h3>
@@ -103,7 +151,7 @@
                             <p>See the list of users</p>
                         </div>
                     </a>
-                </div>
+                </div> -->
         		<!-- <div class="col-sm-3 col-content">
                     <a href="listevent">
             			<div class="icon-info">

@@ -45,7 +45,7 @@
                             <label for="stream_resolution">Resolution</label>
                             <select name="stream_resolution" id="stream_resolution" class="form-control">
                                 <option>640x360</option>
-                                <option>1024x576</option>
+                                <option>960x540</option>
                                 <option>1280x720</option>
                                 <option>1920x1080</option>
                             </select>
